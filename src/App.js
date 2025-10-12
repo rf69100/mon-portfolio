@@ -74,7 +74,7 @@ const Competences = () => {
     {
       title: "Backend",
       color: "green",
-      techs: ["Laravel", "PHP", "Python", "Node.js"]
+      techs: ["Laravel", "PHP", "Python"]
     },
     {
       title: "Base de données",
