@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './index.css';
 
 // Loader
 const Loader = () => (
@@ -42,7 +41,7 @@ const Header = () => (
 // Accueil
 const Accueil = () => (
   <section id="accueil" className="pt-32 pb-20 bg-transparent fade-in">
-    <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl mx-auto">
+    <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
       <div className="mx-auto mb-6 w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-blue-400 shadow-lg bg-gray-900 flex items-center justify-center">
         <img src="" alt="Photo de profil" className="rounded-full w-20 h-20 md:w-28 md:h-28 object-cover" />
       </div>
@@ -89,6 +88,20 @@ const Competences = () => {
     }
   ];
 
+  const colorClasses = {
+    blue: 'from-blue-900 to-blue-800 border-blue-400',
+    green: 'from-green-900 to-green-800 border-green-400',
+    yellow: 'from-yellow-900 to-yellow-800 border-yellow-400',
+    red: 'from-red-900 to-red-800 border-red-400'
+  };
+
+  const titleColors = {
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400'
+  };
+
   return (
     <section id="competences" className="py-16 md:py-20 bg-transparent fade-in">
       <div className="container mx-auto px-4 md:px-6 text-center mb-10 md:mb-16">
@@ -97,12 +110,19 @@ const Competences = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
         {skills.map((skill) => (
-          <div key={skill.title} className={`bg-gradient-to-br from-${skill.color}-900 via-gray-900 to-${skill.color}-800 rounded-xl p-4 md:p-6 shadow-lg flex flex-col items-center transition-all duration-300 relative hover:z-10 hover:scale-105 hover:shadow-2xl hover:border-4 hover:border-${skill.color}-400`}>
-            <h3 className={`text-lg md:text-xl font-bold text-${skill.color}-400 mb-4 font-mono`}>{skill.title}</h3>
+          <div 
+            key={skill.title} 
+            className={`bg-gradient-to-br ${colorClasses[skill.color]} via-gray-900 rounded-xl p-4 md:p-6 shadow-lg flex flex-col items-center transition-all duration-300 relative hover:z-10 hover:scale-105 hover:shadow-2xl border-4`}
+          >
+            <h3 className={`text-lg md:text-xl font-bold ${titleColors[skill.color]} mb-4 font-mono`}>{skill.title}</h3>
             <div className="grid grid-cols-2 gap-4">
               {skill.techs.map((tech) => (
                 <div key={tech} className="flex flex-col items-center">
-                  <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.toLowerCase()}/${tech.toLowerCase()}-original.svg`} alt={tech} className="w-8 h-8 md:w-10 md:h-10 mb-2" />
+                  <img 
+                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.toLowerCase()}/${tech.toLowerCase()}-original.svg`} 
+                    alt={tech} 
+                    className="w-8 h-8 md:w-10 md:h-10 mb-2" 
+                  />
                   <span className="text-white text-xs md:text-sm font-mono">{tech}</span>
                 </div>
               ))}
@@ -143,6 +163,30 @@ const Parcours = () => {
     }
   ];
 
+  const circleBorderColors = {
+    green: 'border-green-900',
+    blue: 'border-blue-900',
+    yellow: 'border-yellow-900'
+  };
+
+  const cardBorderColors = {
+    green: 'border-green-400',
+    blue: 'border-blue-400',
+    yellow: 'border-yellow-400'
+  };
+
+  const titleTextColors = {
+    green: 'text-green-400',
+    blue: 'text-blue-400',
+    yellow: 'text-yellow-400'
+  };
+
+  const arrowColors = {
+    green: '#10B981',
+    blue: '#3B82F6',
+    yellow: '#FBBF24'
+  };
+
   return (
     <section id="experience" className="py-20 bg-transparent fade-in">
       <div className="container mx-auto px-6 text-center mb-16">
@@ -153,19 +197,19 @@ const Parcours = () => {
         <div className="flex items-center justify-start gap-12 max-w-4xl mx-auto">
           {steps.map((step, idx) => (
             <div key={step.number} className="relative flex flex-col items-center w-64 min-w-[16rem]">
-              <div className={`bg-${step.color}-400 w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-lg border-4 border-${step.color}-900`}>
+              <div className={`bg-${step.color}-400 w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-lg border-4 ${circleBorderColors[step.color]}`}>
                 <span className="font-mono font-bold text-lg text-white">{step.number}</span>
               </div>
-              <div className={`bg-gray-900 rounded-xl p-6 shadow-lg text-center w-full border-2 border-${step.color}-400 font-mono`}>
-                <h3 className={`text-lg font-semibold text-${step.color}-400`}>{step.title}</h3>
+              <div className={`bg-gray-900 rounded-xl p-6 shadow-lg text-center w-full border-2 ${cardBorderColors[step.color]} font-mono`}>
+                <h3 className={`text-lg font-semibold ${titleTextColors[step.color]}`}>{step.title}</h3>
                 <span className="block text-sm text-gray-400 mb-2">{step.date}<br/>{step.school}</span>
                 <p className="text-gray-300 text-sm">{step.description}</p>
               </div>
               {idx < steps.length - 1 && (
                 <div className="absolute top-6 right-[-40px] flex items-center">
                   <svg width="64" height="24" viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="12" x2="56" y2="12" stroke={`#${step.color === 'green' ? '10B981' : step.color === 'blue' ? '3B82F6' : 'FBBF24'}`} strokeWidth="4"/>
-                    <polygon points="56,6 64,12 56,18" fill={`#${step.color === 'green' ? '10B981' : step.color === 'blue' ? '3B82F6' : 'FBBF24'}`} />
+                    <line x1="0" y1="12" x2="56" y2="12" stroke={arrowColors[step.color]} strokeWidth="4"/>
+                    <polygon points="56,6 64,12 56,18" fill={arrowColors[step.color]} />
                   </svg>
                 </div>
               )}
@@ -180,6 +224,7 @@ const Parcours = () => {
 // Projets
 const Projets = ({ projects, activeFilter, setActiveFilter }) => {
   const filteredProjects = activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter);
+  
   return (
     <section id="projets" className="py-20 bg-transparent fade-in">
       <div className="container mx-auto px-6 text-center mb-16">
@@ -188,73 +233,122 @@ const Projets = ({ projects, activeFilter, setActiveFilter }) => {
       </div>
       <div className="flex justify-center space-x-4 mb-12">
         {["all", "web"].map((filter) => (
-          <button key={filter} onClick={() => setActiveFilter(filter)}
-            className={`px-6 py-2 rounded-full font-mono ${activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}>
+          <button 
+            key={filter} 
+            onClick={() => setActiveFilter(filter)}
+            className={`px-6 py-2 rounded-full font-mono ${activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
+          >
             {filter === 'all' ? "Tous" : "Web"}
           </button>
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProjects.map((project) => (
-          <div key={project.id} className="bg-gradient-to-br from-blue-900 via-gray-900 to-blue-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border-2 border-blue-400 font-mono">
-            {/* Image : prend 3/4 de la carte */}
-            <div className="h-64 md:h-72 lg:h-80 overflow-hidden rounded-t-xl">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-            </div>
+        {filteredProjects.map((project) => {
+          const projectLink = project.link || project.github;
+          return (
+            <div 
+              key={project.id} 
+              onClick={() => projectLink && window.open(projectLink, '_blank')}
+              className={`bg-gradient-to-br from-blue-900 via-gray-900 to-blue-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all border-2 border-blue-400 font-mono ${projectLink ? 'cursor-pointer hover:scale-105' : ''}`}
+            >
+              <div className="h-64 md:h-72 lg:h-80 overflow-hidden rounded-t-xl">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform"
+                />
+              </div>
 
-            {/* Bloc texte : prend 1/4 de la carte */}
-            <div className="p-3 bg-gray-900">
-              <h3 className="text-md md:text-lg font-bold text-white mb-1 truncate">{project.title}</h3>
-              <p className="text-gray-300 text-sm mb-2 truncate">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {project.techs.map((tech) => (
-                  <span key={tech} className="text-xs px-2 py-0.5 rounded-full bg-gray-700 text-white">{tech}</span>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-xs bg-gray-800 hover:bg-gray-700 text-white px-2 py-1 rounded-md transition-colors">
-                    GitHub
-                  </a>
-                )}
-                {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded-md transition-colors">
-                    Voir en ligne
-                  </a>
-                )}
+              <div className="p-3 bg-gray-900">
+                <h3 className="text-md md:text-lg font-bold text-white mb-1 truncate">{project.title}</h3>
+                <p className="text-gray-300 text-sm mb-2 truncate">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {project.techs.map((tech) => (
+                    <span key={tech} className="text-xs px-2 py-0.5 rounded-full bg-gray-700 text-white">{tech}</span>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  {project.github && (
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs bg-gray-800 hover:bg-gray-700 text-white px-2 py-1 rounded-md transition-colors" 
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      GitHub
+                    </a>
+                  )}
+                  {project.link && (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded-md transition-colors" 
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Voir en ligne
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
 };
 
 // Contact
-const Contact = () => (
-  <section id="contact" className="py-20 bg-transparent fade-in">
-    <div className="container mx-auto px-6 max-w-2xl">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-extrabold text-blue-400 mb-4 font-mono">Contactez-moi</h2>
-        <p className="text-xl text-gray-300 font-mono">Disponible pour un stage en développement web</p>
-      </div>
-      <form className="space-y-6 bg-gray-900 rounded-xl p-8 border-2 border-blue-400 font-mono">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input type="text" placeholder="Nom" className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <input type="email" placeholder="Email" className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+const Contact = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Logique de soumission du formulaire à ajouter ici
+  };
+
+  return (
+    <section id="contact" className="py-20 bg-transparent fade-in">
+      <div className="container mx-auto px-6 max-w-2xl">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-extrabold text-blue-400 mb-4 font-mono">Contactez-moi</h2>
+          <p className="text-xl text-gray-300 font-mono">Disponible pour un stage en développement web</p>
         </div>
-        <input type="text" placeholder="Sujet" className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-        <textarea rows={5} placeholder="Message..." className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-        <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold">🚀 Envoyer le message</button>
-      </form>
-    </div>
-  </section>
-);
+        <div className="space-y-6 bg-gray-900 rounded-xl p-8 border-2 border-blue-400 font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input 
+              type="text" 
+              placeholder="Nom" 
+              className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input 
+              type="email" 
+              placeholder="Email" 
+              className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <input 
+            type="text" 
+            placeholder="Sujet" 
+            className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <textarea 
+            rows={5} 
+            placeholder="Message..." 
+            className="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+          <button 
+            type="button" 
+            onClick={handleSubmit}
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold"
+          >
+            🚀 Envoyer le message
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // Footer
 const Footer = () => (
@@ -276,7 +370,6 @@ const Footer = () => (
     </div>
   </footer>
 );
-
 
 // Composant principal
 const Portfolio = () => {
