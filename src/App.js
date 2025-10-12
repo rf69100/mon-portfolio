@@ -56,7 +56,7 @@ const Accueil = () => (
       <p className="text-base md:text-xl text-gray-300 mb-8 font-mono">
         Actuellement en quête d'une nouvelle "quête" : un stage pour ma deuxième année de BTS SIO.
       </p>
-      <a href="/CV_Ryan_Fonseca.pdf" download className="border-2 border-blue-400 text-white px-8 py-3 rounded-lg hover:bg-blue-900 transition-colors font-mono font-bold shadow-lg hover:scale-105">
+      <a href="/ryanf_fonseca_cv.pdf" download className="border-2 border-blue-400 text-white px-8 py-3 rounded-lg hover:bg-blue-900 transition-colors font-mono font-bold shadow-lg hover:scale-105">
         ⬇️ Télécharger CV
       </a>
     </div>
