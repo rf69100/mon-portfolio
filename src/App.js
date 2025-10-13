@@ -27,7 +27,7 @@ const Header = () => (
     <div className="container mx-auto px-4 md:px-6 py-4">
       <div className="grid grid-cols-3 items-center">
         {/* Logo */}
-        <div className="text-2xl font-extrabold text-blue-400 tracking-widest font-mono flex items-center">
+        <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4 font-mono tracking-widest">
           <span className="mr-2">🎮</span> MonPortfolio
         </div>
         
