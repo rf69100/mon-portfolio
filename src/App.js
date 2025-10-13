@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+
 /**
  * LOADER - Composant d'animation de chargement
  * Affiche une animation pendant le chargement de l'application
@@ -24,28 +25,30 @@ const Loader = () => (
  */
 const Header = () => (
   <header className="fixed top-0 w-full bg-gray-900 shadow-sm z-50 border-b-4 border-blue-700">
-    <div className="container mx-auto px-4 md:px-6 py-4">
-      <div className="grid grid-cols-3 items-center">
+    <div className="container mx-auto px-4 py-3">
+      <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4 font-mono tracking-widest">
-          <span className="mr-2">🎮</span> MonPortfolio
+        <div className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono">
+          <span className="mr-2">🎮</span> 
+          <span className="hidden sm:inline">MonPortfolio</span>
+          <span className="sm:hidden">MP</span>
         </div>
         
-        {/* Navigation principale */}
-        <nav className="hidden md:flex space-x-8 font-mono justify-center">
-          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all">Accueil</a>
-          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all">Projets</a>
-          <a href="#experience" className="text-gray-300 hover:text-blue-400 transition-all">Expérience</a>
-          <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all">Contact</a>
+        {/* Navigation principale - Version mobile */}
+        <nav className="flex space-x-4 md:space-x-6 font-mono">
+          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Accueil</a>
+          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Projets</a>
+          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Compétences</a>
+          <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Contact</a>
         </nav>
         
         {/* Liens réseaux sociaux */}
-        <div className="flex space-x-4 justify-end">
+        <div className="flex space-x-3">
           <a href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-6 h-6" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-5 h-5 md:w-6 md:h-6" />
           </a>
           <a href="https://github.com/rf69100" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6 filter invert" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-5 h-5 md:w-6 md:h-6 filter invert" />
           </a>
         </div>
       </div>
@@ -162,50 +165,44 @@ const Competences = () => {
   };
 
   return (
-    <section id="competences" className="py-20 bg-transparent fade-in">
-      <div className="container mx-auto px-6 text-center mb-16">
-        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 font-mono tracking-tight">
+    <section id="competences" className="py-16 md:py-20 bg-transparent fade-in">
+      <div className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 font-mono tracking-tight">
           MES COMPÉTENCES
         </h2>
-        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">Arsenal Technologique</p>
+        <p className="text-lg md:text-xl text-gray-400 font-mono uppercase tracking-widest">Arsenal Technologique</p>
       </div>
       
-      <div className="container mx-auto px-6">
-        {/* Grille 2x2 des compétences */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-6xl mx-auto">
           {skills.map((skill) => (
             <div 
               key={skill.title} 
-              className={`${cardStyles[skill.color]} rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl min-h-[380px] flex flex-col`}
+              className={`${cardStyles[skill.color]} rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg transition-all duration-300 hover:scale-105 min-h-[280px] md:min-h-[320px] flex flex-col`}
             >
-              {/* Titre de la catégorie */}
-              <h3 className={`text-2xl font-bold ${titleColors[skill.color]} mb-8 font-mono uppercase tracking-wide text-center`}>
+              <h3 className={`text-lg md:text-xl font-bold ${titleColors[skill.color]} mb-4 md:mb-6 font-mono uppercase tracking-wide text-center`}>
                 {skill.title}
               </h3>
               
-              {/* Grille interne pour les technologies - AGGRANDIE */}
-              <div className="grid grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 flex-1">
                 {skill.techs.map((tech) => (
                   <div 
                     key={tech.name} 
-                    className="flex items-center gap-4 bg-gray-800/40 rounded-xl p-4 transition-all duration-200 hover:bg-gray-700/50 hover:scale-105 hover:shadow-lg border border-gray-700/50"
+                    className="flex items-center gap-2 md:gap-3 bg-gray-800/40 rounded-lg md:rounded-xl p-2 md:p-3 transition-all duration-200 hover:bg-gray-700/50 hover:scale-105 border border-gray-700/50"
                   >
-                    {/* Icône de la technologie - AGGRANDIE */}
                     <img 
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-original.svg`} 
                       alt={tech.name} 
-                      className="w-12 h-12 object-contain filter brightness-125 drop-shadow-lg" 
+                      className="w-8 h-8 md:w-10 md:h-10 object-contain filter brightness-125" 
                       onError={(e) => {
                         e.target.style.display = 'none';
-                        // Fallback avec emoji si l'image ne charge pas
                         const fallback = document.createElement('span');
-                        fallback.className = 'text-2xl';
+                        fallback.className = 'text-lg md:text-xl';
                         fallback.textContent = '💻';
                         e.target.parentNode.insertBefore(fallback, e.target.nextSibling);
                       }}
                     />
-                    {/* Nom de la technologie - AGGRANDI */}
-                    <span className="text-white text-lg font-mono font-bold flex-1">
+                    <span className="text-white text-sm md:text-base font-mono font-bold flex-1 truncate">
                       {tech.name}
                     </span>
                   </div>
@@ -218,6 +215,8 @@ const Competences = () => {
     </section>
   );
 };
+
+
 /**
  * PARCOURS - Section du parcours académique et professionnel
  * Présente les étapes de formation et expériences

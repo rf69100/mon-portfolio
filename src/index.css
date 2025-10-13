@@ -14,3 +14,27 @@
     transform: translateY(0);
   }
 }
+
+/* Correction pour les petits écrans */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Empêcher le débordement horizontal */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ajustements texte pour mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  h2 {
+    font-size: 2rem !important;
+  }
+}
