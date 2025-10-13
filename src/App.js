@@ -383,11 +383,11 @@ const Portfolio = () => {
       category: "web",
       description: "Dashboard interactif en React avec statistiques de joueurs NBA et classements des équipes.",
       github: "https://github.com/rf69100/nba-dashbord",
-      link: "",
+      link: "https://ryanfonseca.fr/websites/nba-dashboard",
       techs: ["React"],
       image: "nba-dashboard.png"
     }
-  ];
+  ];  
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 700);
