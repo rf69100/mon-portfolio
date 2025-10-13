@@ -25,33 +25,45 @@ const Loader = () => (
  */
 const Header = () => (
   <header className="fixed top-0 w-full bg-gray-900 shadow-sm z-50 border-b-4 border-blue-700">
-    <div className="container mx-auto px-4 py-3">
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <div className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono">
+    <div className="container mx-auto px-4 md:px-6 py-4">
+      <div className="grid grid-cols-3 items-center">
+        {/* Logo à gauche */}
+        <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono tracking-widest flex items-center">
           <span className="mr-2">🎮</span> 
           <span className="hidden sm:inline">MonPortfolio</span>
           <span className="sm:hidden">MP</span>
         </div>
         
-        {/* Navigation principale - Version mobile */}
-        <nav className="flex space-x-4 md:space-x-6 font-mono">
-          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Accueil</a>
-          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Projets</a>
-          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Compétences</a>
-          <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all text-sm md:text-base">Contact</a>
+        {/* Navigation centrée */}
+        <nav className="hidden md:flex space-x-8 font-mono justify-center">
+          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all">Accueil</a>
+          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all">Projets</a>
+          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all">Compétences</a>
+          <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all">Contact</a>
+        </nav>
+
+        {/* Navigation mobile centrée */}
+        <nav className="md:hidden flex space-x-4 font-mono justify-center">
+          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Accueil</a>
+          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Projets</a>
+          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Compétences</a>
         </nav>
         
-        {/* Liens réseaux sociaux */}
-        <div className="flex space-x-3">
+        {/* Liens réseaux sociaux à droite */}
+        <div className="flex space-x-4 justify-end">
           <a href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-5 h-5 md:w-6 md:h-6" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-6 h-6" />
           </a>
           <a href="https://github.com/rf69100" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-5 h-5 md:w-6 md:h-6 filter invert" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6 filter invert" />
           </a>
         </div>
       </div>
+
+      {/* Navigation mobile pour Contact (ligne supplémentaire sur mobile) */}
+      <nav className="md:hidden flex justify-center mt-2 font-mono">
+        <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Contact</a>
+      </nav>
     </div>
   </header>
 );
