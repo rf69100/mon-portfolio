@@ -676,7 +676,7 @@ const Portfolio = () => {
       github: "https://github.com/rf69100/f1-strategy-simulator",
       link: "/f1-simulator/",
       techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
-      image: "https://images.unsplash.com/photo-1549940432-1eabb1e1243a?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
       features: [
         "Données F1 2026 réalistes (20 pilotes, 10 équipes)",
         "Physique de course avancée avec calculs réalistes",
