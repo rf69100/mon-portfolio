@@ -200,7 +200,7 @@ const Competences = () => {
                 {skill.techs.map((tech) => (
                   <div 
                     key={tech.name} 
-                    className="flex items-center gap-2 md:gap-3 bg-gray-800/40 rounded-lg md:rounded-xl p-2 md:p-3 transition-all duration-200 hover:bg-gray-700/50 hover:scale-105 border border-gray-700/50"
+                    className="flex items-center gap-2 md:gap-3 p-2 md:p-3"
                   >
                     <img 
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-original.svg`} 
