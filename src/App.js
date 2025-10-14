@@ -634,7 +634,7 @@ const Portfolio = () => {
 
     {
       id: 2,
-      title: "Spotify Album Explorer",
+      title: "Spotify Album finder",
       category: "web",
       description: "Application web pour explorer la discographie complète des artistes via l'API Spotify avec interface moderne et responsive.",
       github: "https://github.com/rf69100/album_finder_spotify",
