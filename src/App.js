@@ -242,7 +242,8 @@ const Parcours = () => {
       color: "cyan",
       date: "2021 - 2024",
       school: "Lycée Frédéric Fays",
-      description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques)."
+      description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques).",
+      progress: 100 // Bac terminé
     },
     {
       number: 2,
@@ -250,7 +251,8 @@ const Parcours = () => {
       color: "blue",
       date: "2024 - 2026",
       school: "Lycée Les Chassagnes",
-      description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux."
+      description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
+      progress: 75 // BTS en cours, stage inclus
     },
     {
       number: 3,
@@ -258,7 +260,8 @@ const Parcours = () => {
       color: "purple",
       date: "2025",
       school: "Les Chassagnes",
-      description: "Développement d'une application de gestion de stages en Laravel."
+      description: "Développement d'une application de gestion de stages en Laravel.",
+      progress: 100 // Stage terminé
     }
   ];
 
@@ -320,9 +323,23 @@ const Parcours = () => {
                 
                 {/* Barre de progression */}
                 <div className="mt-4 bg-gray-800 rounded-full h-2 overflow-hidden">
-                  <div className={`h-full bg-gradient-to-r ${step.color === 'cyan' ? 'from-cyan-500 to-cyan-400' : step.color === 'blue' ? 'from-blue-500 to-blue-400' : 'from-purple-500 to-purple-400'} transition-all duration-500`} 
-                       style={{width: step.number === 3 ? '50%' : '100%'}}>
+                  <div 
+                    className={`h-full bg-gradient-to-r ${
+                      step.color === 'cyan' ? 'from-cyan-500 to-cyan-400' : 
+                      step.color === 'blue' ? 'from-blue-500 to-blue-400' : 
+                      'from-purple-500 to-purple-400'
+                    } transition-all duration-500`} 
+                    style={{width: `${step.progress}%`}}
+                  >
                   </div>
+                </div>
+                
+                {/* Indicateur de progression */}
+                <div className="flex justify-between items-center mt-2">
+                  <span className="text-xs text-gray-400 font-mono">Progression</span>
+                  <span className="text-xs font-bold font-mono text-white">
+                    {step.progress}%
+                  </span>
                 </div>
               </div>
             </div>
