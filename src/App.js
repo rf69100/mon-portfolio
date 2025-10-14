@@ -299,7 +299,7 @@ const Parcours = () => {
             <div key={step.number} className="relative group">
               <div className={`${cardStyles[step.color]} border-2 rounded-2xl p-6 h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg`}>
                 {/* Badge de niveau */}
-                <div className={`absolute -top-4 left-6 ${badgeStyles[step.color]} border-2 rounded-full px-4 py-1 font-mono font-bold text-sm`}>
+                <div className={`absolute -top-10 left-6 ${badgeStyles[step.color]} border-2 rounded-full px-4 py-1 font-mono font-bold text-sm`}>
                   LVL {step.number}
                 </div>
                 
