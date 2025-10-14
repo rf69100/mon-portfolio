@@ -630,7 +630,24 @@ const Portfolio = () => {
       link: "/nba_dashboard/",
       techs: ["React", "API", "Stats"],
       image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80"
-    }
+    },
+
+    {
+      id: 2,
+      title: "Spotify Album Explorer",
+      category: "web",
+      description: "Application web pour explorer la discographie complète des artistes via l'API Spotify avec interface moderne et responsive.",
+      github: "https://github.com/rf69100/album_finder_spotify",
+      link: "/spotify-explorer/",
+      techs: ["React", "Spotify API", "Bootstrap", "CSS3"],
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      features: [
+        "Recherche d'artistes en temps réel",
+        "Affichage de la discographie complète",
+        "Design responsive optimisé mobile",
+        "Intégration directe avec Spotify",
+        "Interface utilisateur moderne" ]
+    },
   ];  
 
   // Effet pour simuler le chargement
