@@ -536,7 +536,6 @@ const Contact = () => {
               {/* Spécialités */}
               <div className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 border-2 border-yellow-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="text-2xl">🛠️</div>
                   <div className="text-yellow-300 font-mono font-bold uppercase">SPÉCIALITÉS</div>
                 </div>
                 <div className="space-y-3">
@@ -605,7 +604,7 @@ const Footer = () => (
       
       {/* Copyright */}
       <div className="border-t border-gray-700 pt-6">
-        <p className="text-gray-500 font-mono text-sm">© 2025 MonPortfolio • Made with 💙 & ⚡</p>
+        <p className="text-gray-500 font-mono text-sm">© 2025 MonPortfolio </p>
       </div>
     </div>
   </footer>
