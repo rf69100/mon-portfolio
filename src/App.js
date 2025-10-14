@@ -126,7 +126,8 @@ const Competences = () => {
         { name: "HTML5", icon: "html5" },
         { name: "CSS3", icon: "css3" },
         { name: "JavaScript", icon: "javascript" },
-        { name: "Tailwind CSS", icon: "tailwindcss" }
+        { name: "Tailwind CSS", icon: "tailwindcss" },
+        { name: "TypeScript", icon: "typescript" },
       ]
     },
     {
@@ -155,7 +156,7 @@ const Competences = () => {
         { name: "Linux", icon: "linux" },
         { name: "Windows", icon: "windows" },
         { name: "VS Code", icon: "vscode" },
-        { name: "Figma", icon: "figma" }
+        { name: "Figma", icon: "figma" },
       ]
     }
   ];
