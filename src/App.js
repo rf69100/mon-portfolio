@@ -668,26 +668,26 @@ const Portfolio = () => {
       ]
     },
 
-    // {
-    //   id: 3,
-    //   title: "F1 Strategy Simulator 2026",
-    //   category: "web",
-    //   description: "Simulation complète de stratégie F1 avec données 2026, calculs physiques avancés et interface de course réaliste.",
-    //   github: "https://github.com/rf69100/f1-strategy-simulator",
-    //   link: "/f1-simulator/",
-    //   techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
-    //   image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
-    //   features: [
-    //     "Données F1 2026 réalistes (20 pilotes, 10 équipes)",
-    //     "Physique de course avancée avec calculs réalistes",
-    //     "Système de stratégie optimisée avec IA",
-    //     "Télémétrie en temps réel avec alertes intelligentes",
-    //     "Gestion Safety Car et conditions météo dynamiques",
-    //     "Interface immersive style F1 officiel",
-    //     "18 circuits avec caractéristiques uniques",
-    //     "Système de pneus et carburant réaliste"
-    //   ]
-    // },
+    {
+      id: 3,
+      title: "F1 Strategy Simulator 2026",
+      category: "web",
+      description: "Simulation complète de stratégie F1 avec données 2026, calculs physiques avancés et interface de course réaliste.",
+      github: "https://github.com/rf69100/f1-strategy-simulator",
+      link: "/f1-simulator/",
+      techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
+      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
+      features: [
+        "Données F1 2026 réalistes (20 pilotes, 10 équipes)",
+        "Physique de course avancée avec calculs réalistes",
+        "Système de stratégie optimisée avec IA",
+        "Télémétrie en temps réel avec alertes intelligentes",
+        "Gestion Safety Car et conditions météo dynamiques",
+        "Interface immersive style F1 officiel",
+        "18 circuits avec caractéristiques uniques",
+        "Système de pneus et carburant réaliste"
+      ]
+    },
   ];
 
   // Effet pour simuler le chargement
