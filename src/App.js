@@ -495,8 +495,8 @@ const Contact = () => {
               {/* Mission principale */}
               <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border-2 border-purple-500/50 rounded-2xl p-6 text-center transform rotate-1 hover:rotate-0 transition-transform duration-300">
                 <h3 className="text-purple-300 font-mono font-bold text-lg uppercase mb-2">MISSION RECHERCHÉE</h3>
-                <div className="text-white font-mono text-xl font-bold mb-2">Stage Développeur</div>
-                <div className="text-gray-300 font-mono text-sm">5 Janvier au 16 Février 2026</div>
+                <div className="text-white font-mono text-xl font-bold mb-2">Stage Développeur Web</div>
+                <div className="text-gray-300 font-mono text-sm">5 Janvier au 21 Février 2026</div>
               </div>
 
               {/* Disponibilité */}
