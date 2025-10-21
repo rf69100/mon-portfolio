@@ -104,7 +104,7 @@ const Accueil = () => (
       </div>
       
       {/* Bouton de téléchargement CV */}
-      <a href="/ryanf_fonseca_cv.pdf" download className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white px-8 py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
+      <a href="/ryan_fonseca_cv.pdf" download className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white px-8 py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
         TÉLÉCHARGER CV
       </a>
     </div>
