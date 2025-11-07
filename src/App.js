@@ -700,7 +700,7 @@ const Portfolio = () => {
       github: "https://github.com/rf69100/CafePatisserieSite",
       link: "/cafe-patisserie/",
       techs: ["React", "Vite", "Wouter", "Tailwind", "Express", "Drizzle"],
-      image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
       features: [
         "Routing SPA optimisé sous-dossier Apache",
         "Pages légales et privacy intégrées",
