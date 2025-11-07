@@ -688,6 +688,25 @@ const Portfolio = () => {
         "Système de pneus et carburant réaliste"
       ]
     },
+
+    {
+      id: 4,
+      title: "Café Pâtisserie",
+      category: "web",
+      description: "Site vitrine moderne pour une pâtisserie/café, réalisé avec React, Vite, Wouter, Tailwind et backend Express/Drizzle.",
+      github: "https://github.com/rf69100/CafePatisserieSite",
+      link: "/cafe-patisserie/",
+      techs: ["React", "Vite", "Wouter", "Tailwind", "Express", "Drizzle"],
+      image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+      features: [
+        "Routing SPA optimisé sous-dossier Apache",
+        "Pages légales et privacy intégrées",
+        "Design responsive et moderne",
+        "Catalogue produits dynamique",
+        "Déploiement automatisé sur VPS OVH",
+        "Backend Express + MariaDB (Drizzle ORM)"
+      ]
+    },
   ];
 
   // Effet pour simuler le chargement
