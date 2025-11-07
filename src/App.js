@@ -397,12 +397,12 @@ const Projets = ({ projects, activeFilter, setActiveFilter }) => {
               >
                 <div className={`bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-2 border-purple-400 rounded-2xl overflow-hidden shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl h-full flex flex-col ${projectLink ? 'cursor-pointer' : ''}`}
                      onClick={() => projectLink && window.open(projectLink, '_blank')}>
-                  
                   {/* Badge NEW sur les projets récents */}
-                  <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
-                    ⭐ NEW
-                  </div>
-                  
+                  {project.new === true && (
+                    <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
+                      ⭐ NEW
+                    </div>
+                  )}
                   {/* Image du projet */}
                   <div className="h-48 overflow-hidden">
                     <img 
