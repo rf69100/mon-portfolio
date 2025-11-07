@@ -638,7 +638,7 @@ const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("all");
 
   // Données des projets
-  const projects = [
+  const projets = [
     {
       id: 1,
       title: "NBA Dashboard",
@@ -647,7 +647,8 @@ const Portfolio = () => {
       github: "https://github.com/rf69100/nba-dashbord",
       link: "/nba_dashboard/",
       techs: ["React", "API", "Stats"],
-      image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80"
+      image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80",
+      new: false
     },
 
     {
@@ -665,7 +666,8 @@ const Portfolio = () => {
         "Design responsive optimisé mobile",
         "Intégration directe avec Spotify",
         "Interface utilisateur moderne"
-      ]
+      ],
+      new: false
     },
 
     {
@@ -686,7 +688,8 @@ const Portfolio = () => {
         "Interface immersive style F1 officiel",
         "18 circuits avec caractéristiques uniques",
         "Système de pneus et carburant réaliste"
-      ]
+      ],
+      new: false
     },
 
     {
@@ -705,7 +708,8 @@ const Portfolio = () => {
         "Catalogue produits dynamique",
         "Déploiement automatisé sur VPS OVH",
         "Backend Express + MariaDB (Drizzle ORM)"
-      ]
+      ],
+      new: true
     },
   ];
 
@@ -725,7 +729,7 @@ const Portfolio = () => {
       <Accueil />
       <Competences />
       <Parcours />
-      <Projets projects={projects} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+      <Projets projects={projets} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       <Contact />
       <Footer />
     </div>
