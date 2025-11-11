@@ -103,10 +103,17 @@ const Accueil = () => (
         </p>
       </div>
       
-      {/* Bouton de téléchargement CV */}
-      <a href="/ryan_fonseca_cv.pdf" download className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white px-8 py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
-        TÉLÉCHARGER CV
-      </a>
+      {/* Boutons de téléchargement - même taille */}
+      <div className="flex justify-center gap-4 mb-6">
+        <a href="/ryan_fonseca_cv.pdf" download className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
+          TÉLÉCHARGER CV
+        </a>
+
+        <a href="/missions_stage.pdf" download className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
+          TÉLÉCHARGER MISSIONS
+        </a>
+      </div>
+
     </div>
   </section>
 );
