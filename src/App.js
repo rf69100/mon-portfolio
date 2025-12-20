@@ -769,7 +769,7 @@ const Portfolio = () => {
       category: "web",
       description: "Plateforme e-commerce complète pour produits de fitness avec administration avancée, gestion des commandes et authentification 2FA.",
       github: "https://github.com/rf69100/FitZoneShopFinal",
-      link: "", // À remplir si vous déployez le projet
+      link: "/FitZoneShop/",
       techs: ["Laravel 12", "React 19", "TypeScript", "Inertia.js", "Tailwind CSS 4", "MariaDB", "Pest PHP"],
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
       features: [
