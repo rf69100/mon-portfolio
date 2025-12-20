@@ -24,50 +24,108 @@ const Loader = () => (
  * HEADER - Barre de navigation principale
  * Contient les liens de navigation et les réseaux sociaux
  */
-const Header = () => (
-  <header className="fixed top-0 w-full bg-gray-900 shadow-sm z-50 border-b-4 border-blue-700">
-    <div className="container mx-auto px-4 md:px-6 py-4">
-      <div className="grid grid-cols-3 items-center">
-        {/* Logo à gauche */}
-        <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono tracking-widest flex items-center">
-          <span className="mr-2">🎮</span> 
-          <span className="hidden sm:inline">MonPortfolio</span>
-          <span className="sm:hidden">MP</span>
-        </div>
-        
-        {/* Navigation centrée */}
-        <nav className="hidden md:flex space-x-8 font-mono justify-center">
-          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all">Accueil</a>
-          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all">Projets</a>
-          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all">Compétences</a>
-          <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all">Contact</a>
-        </nav>
+const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
 
-        {/* Navigation mobile centrée */}
-        <nav className="md:hidden flex space-x-4 font-mono justify-center">
-          <a href="#accueil" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Accueil</a>
-          <a href="#projets" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Projets</a>
-          <a href="#competences" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Compétences</a>
-        </nav>
-        
-        {/* Liens réseaux sociaux à droite */}
-        <div className="flex space-x-4 justify-end">
-          <a href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-6 h-6" />
-          </a>
-          <a href="https://github.com/rf69100" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-125">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6 filter invert" />
-          </a>
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      scrolled
+        ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b-2 border-blue-500/50'
+        : 'bg-gray-900/80 backdrop-blur-sm border-b-4 border-blue-700'
+    }`}>
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+        <div className="grid grid-cols-3 items-center">
+          {/* Logo à gauche avec animation */}
+          <div className="group flex items-center">
+            <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono tracking-widest flex items-center cursor-default">
+              <span className="mr-2 transform group-hover:rotate-12 transition-transform duration-300">🎮</span>
+              <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">MonPortfolio</span>
+              <span className="sm:hidden">MP</span>
+            </div>
+          </div>
+
+          {/* Navigation centrée - Desktop */}
+          <nav className="hidden md:flex space-x-6 lg:space-x-8 font-mono justify-center">
+            {[
+              { href: '#accueil', label: 'Accueil' },
+              { href: '#projets', label: 'Projets' },
+              { href: '#competences', label: 'Compétences' },
+              { href: '#contact', label: 'Contact' }
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="relative text-gray-300 hover:text-blue-400 transition-all duration-300 font-semibold group py-1"
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
+          </nav>
+
+          {/* Navigation mobile centrée */}
+          <nav className="md:hidden flex space-x-3 font-mono justify-center">
+            {[
+              { href: '#accueil', label: 'Accueil' },
+              { href: '#projets', label: 'Projets' },
+              { href: '#competences', label: 'Skills' }
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-gray-300 hover:text-blue-400 transition-all text-xs font-semibold hover:scale-110 transform duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Liens réseaux sociaux à droite avec badges */}
+          <div className="flex space-x-3 justify-end items-center">
+            <a
+              href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group"
+            >
+              <div className="bg-blue-600 p-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 hover:scale-110">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-5 h-5" />
+              </div>
+            </a>
+            <a
+              href="https://github.com/rf69100"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group"
+            >
+              <div className="bg-gray-800 p-2 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-gray-500/50 hover:scale-110 border border-gray-700">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-5 h-5 filter invert" />
+              </div>
+            </a>
+          </div>
         </div>
+
+        {/* Navigation mobile pour Contact (ligne supplémentaire sur mobile) */}
+        <nav className="md:hidden flex justify-center mt-2 font-mono">
+          <a
+            href="#contact"
+            className="text-gray-300 hover:text-blue-400 transition-all text-xs font-semibold hover:scale-110 transform duration-200"
+          >
+            Contact
+          </a>
+        </nav>
       </div>
-
-      {/* Navigation mobile pour Contact (ligne supplémentaire sur mobile) */}
-      <nav className="md:hidden flex justify-center mt-2 font-mono">
-        <a href="#contact" className="text-gray-300 hover:text-blue-400 transition-all text-sm">Contact</a>
-      </nav>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 /**
  * ACCUEIL - Section d'introduction
@@ -99,11 +157,6 @@ const Accueil = () => (
         {/* Badge de formation */}
         <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-2">
           {hero.formation}
-        </div>
-
-        {/* Badge stage validé */}
-        <div className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-4 ml-0 md:ml-2 mt-2 md:mt-0 block md:inline-block">
-          ✅ {hero.context}
         </div>
 
         {/* Indicateur de recherche d'alternance */}
