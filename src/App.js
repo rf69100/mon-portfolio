@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { hero, parcours as parcoursData, contact as contactData } from './content';
 
 
 /**
@@ -88,29 +89,36 @@ const Accueil = () => (
       {/* Carte d'informations */}
       <div className="bg-gray-900/50 border-2 border-blue-500 rounded-xl p-6 mb-8 backdrop-blur-sm">
         <p className="text-lg md:text-xl text-gray-300 mb-4 font-mono leading-relaxed">
-          Passionné par le développement web<br />
-          <span className="text-blue-400 font-bold">React • Laravel </span>
+          {hero.intro}
         </p>
-        
+
+        <p className="text-lg md:text-xl text-gray-300 mb-4 font-mono">
+          <span className="text-blue-400 font-bold">{hero.techs}</span>
+        </p>
+
         {/* Badge de formation */}
-        <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-4">
-          BTS SIO SLAM • 2024-2026
+        <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-2">
+          {hero.formation}
         </div>
-        
-        {/* Indicateur de recherche de stage */}
+
+        {/* Badge stage validé */}
+        <div className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-4 ml-0 md:ml-2 mt-2 md:mt-0 block md:inline-block">
+          ✅ {hero.context}
+        </div>
+
+        {/* Indicateur de recherche d'alternance */}
         <p className="text-lg md:text-xl text-yellow-300 font-mono font-bold mt-4">
-          QUÊTE ACTIVE : Stage 2ème année
+          {hero.searchStatus}
+        </p>
+        <p className="text-base md:text-lg text-gray-300 font-mono mt-2">
+          {hero.searchDetails}
         </p>
       </div>
       
-      {/* Boutons de téléchargement - même taille */}
-      <div className="flex justify-center gap-4 mb-6">
+      {/* Bouton de téléchargement CV */}
+      <div className="flex justify-center mb-6">
         <a href="/ryan_fonseca_cv.pdf" download className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
           TÉLÉCHARGER CV
-        </a>
-
-        <a href="/missions_stage.pdf" download className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
-          TÉLÉCHARGER MISSIONS
         </a>
       </div>
 
@@ -143,6 +151,7 @@ const Competences = () => {
       techs: [
         { name: "Laravel", icon: "laravel" },
         { name: "PHP", icon: "php" },
+        { name: "C#", icon: "csharp" },
         { name: "Python", icon: "python" },
         { name: "Node.js", icon: "nodejs" },
       ]
@@ -152,6 +161,7 @@ const Competences = () => {
       color: "green",
       techs: [
         { name: "MySQL", icon: "mysql" },
+        { name: "MariaDB", icon: "mysql" },
         { name: "PostgreSQL", icon: "postgresql" },
       ]
     },
@@ -242,56 +252,34 @@ const Competences = () => {
  * Présente les étapes de formation et expériences
  */
 const Parcours = () => {
-  // Étapes du parcours
-  const steps = [
-    {
-      number: 1,
-      title: "Baccalauréat Général",
-      color: "cyan",
-      date: "2021 - 2024",
-      school: "Lycée Frédéric Fays",
-      description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques).",
-      progress: 100 // Bac terminé
-    },
-    {
-      number: 2,
-      title: "BTS SIO Option SLAM",
-      color: "blue",
-      date: "2024 - 2026",
-      school: "Lycée Les Chassagnes",
-      description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
-      progress: 75 // BTS en cours, stage inclus
-    },
-    {
-      number: 3,
-      title: "Stage Développeur Web",
-      color: "purple",
-      date: "2025",
-      school: "Les Chassagnes",
-      description: "Développement d'une application de gestion de stages en Laravel.",
-      progress: 100 // Stage terminé
-    }
-  ];
+  // Étapes du parcours importées depuis content.js
+  const steps = parcoursData;
 
   // Styles des cartes par couleur
   const cardStyles = {
     cyan: 'bg-gradient-to-br from-cyan-900/30 to-cyan-800/20 border-cyan-400 shadow-cyan-500/50',
     blue: 'bg-gradient-to-br from-blue-900/30 to-blue-800/20 border-blue-400 shadow-blue-500/50',
-    purple: 'bg-gradient-to-br from-purple-900/30 to-purple-800/20 border-purple-400 shadow-purple-500/50'
+    orange: 'bg-gradient-to-br from-orange-900/30 to-orange-800/20 border-orange-400 shadow-orange-500/50',
+    purple: 'bg-gradient-to-br from-purple-900/30 to-purple-800/20 border-purple-400 shadow-purple-500/50',
+    green: 'bg-gradient-to-br from-green-900/30 to-green-800/20 border-green-400 shadow-green-500/50'
   };
 
   // Couleurs des titres
   const titleColors = {
     cyan: 'text-cyan-300',
     blue: 'text-blue-300',
-    purple: 'text-purple-300'
+    orange: 'text-orange-300',
+    purple: 'text-purple-300',
+    green: 'text-green-300'
   };
 
   // Styles des badges de niveau
   const badgeStyles = {
     cyan: 'bg-cyan-500/20 text-cyan-300 border-cyan-400',
     blue: 'bg-blue-500/20 text-blue-300 border-blue-400',
-    purple: 'bg-purple-500/20 text-purple-300 border-purple-400'
+    orange: 'bg-orange-500/20 text-orange-300 border-orange-400',
+    purple: 'bg-purple-500/20 text-purple-300 border-purple-400',
+    green: 'bg-green-500/20 text-green-300 border-green-400'
   };
 
   return (
@@ -305,7 +293,7 @@ const Parcours = () => {
       
       <div className="container mx-auto px-6">
         {/* Grille des étapes du parcours */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {steps.map((step) => (
             <div key={step.number} className="relative group">
               <div className={`${cardStyles[step.color]} border-2 rounded-2xl p-6 h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg`}>
@@ -331,12 +319,14 @@ const Parcours = () => {
                 
                 {/* Barre de progression */}
                 <div className="mt-4 bg-gray-800 rounded-full h-2 overflow-hidden">
-                  <div 
+                  <div
                     className={`h-full bg-gradient-to-r ${
-                      step.color === 'cyan' ? 'from-cyan-500 to-cyan-400' : 
-                      step.color === 'blue' ? 'from-blue-500 to-blue-400' : 
-                      'from-purple-500 to-purple-400'
-                    } transition-all duration-500`} 
+                      step.color === 'cyan' ? 'from-cyan-500 to-cyan-400' :
+                      step.color === 'blue' ? 'from-blue-500 to-blue-400' :
+                      step.color === 'orange' ? 'from-orange-500 to-orange-400' :
+                      step.color === 'purple' ? 'from-purple-500 to-purple-400' :
+                      'from-green-500 to-green-400'
+                    } transition-all duration-500`}
                     style={{width: `${step.progress}%`}}
                   >
                   </div>
@@ -487,7 +477,7 @@ const Contact = () => {
           </h2>
           <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">Prêt pour la prochaine mission ?</p>
           <div className="mt-6 inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm">
-            DISPONIBLE POUR UN STAGE - 2026
+            {contactData.availability.status} - {contactData.mission.dates}
           </div>
         </div>
         
@@ -502,8 +492,8 @@ const Contact = () => {
               {/* Mission principale */}
               <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border-2 border-purple-500/50 rounded-2xl p-6 text-center transform rotate-1 hover:rotate-0 transition-transform duration-300">
                 <h3 className="text-purple-300 font-mono font-bold text-lg uppercase mb-2">MISSION RECHERCHÉE</h3>
-                <div className="text-white font-mono text-xl font-bold mb-2">Stage Développeur Web</div>
-                <div className="text-gray-300 font-mono text-sm">5 Janvier au 21 Février 2026</div>
+                <div className="text-white font-mono text-xl font-bold mb-2">{contactData.mission.title}</div>
+                <div className="text-gray-300 font-mono text-sm">{contactData.mission.dates}</div>
               </div>
 
               {/* Disponibilité */}
@@ -511,8 +501,8 @@ const Contact = () => {
                 <div className="flex items-center gap-3 mb-4">
                   <div className="text-green-300 font-mono font-bold uppercase">DISPONIBILITÉ</div>
                 </div>
-                <div className="text-white font-mono text-lg font-bold mb-2">IMMÉDIATE POUR TOUT ENTRETIEN</div>
-                <div className="text-gray-400 font-mono text-sm mb-3">Prêt à rejoindre votre équipe</div>
+                <div className="text-white font-mono text-lg font-bold mb-2">{contactData.availability.status}</div>
+                <div className="text-gray-400 font-mono text-sm mb-3">{contactData.availability.detail}</div>
                 <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
                   <div className="bg-gradient-to-r from-green-500 to-emerald-400 h-full w-full animate-pulse"></div>
                 </div>
@@ -588,12 +578,12 @@ const Contact = () => {
           {/* Bouton d'action principal - Design créatif */}
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
-            <a 
+            <a
               href="mailto:fonseca.ryan69100@gmail.com"
               className="relative bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white py-5 rounded-2xl transition-all font-mono font-bold uppercase tracking-wider text-xl text-center shadow-2xl hover:shadow-3xl hover:scale-105 block border-2 border-white/20"
             >
               <span className="flex items-center justify-center gap-3">
-                LANCER UNE MISSION
+                {contactData.cta}
               </span>
             </a>
           </div>
@@ -615,7 +605,9 @@ const Footer = () => (
       <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 font-mono flex items-center justify-center">
         <span className="mr-2">🎮</span> MONPORTFOLIO
       </div>
-      <p className="text-gray-400 mb-6 font-mono uppercase tracking-wider">Développeur Fullstack • BTS SIO SLAM</p>
+      <p className="text-gray-400 mb-6 font-mono uppercase tracking-wider">
+        Développeur Fullstack • BTS SIO SLAM • Stage validé APICIL • Recherche alternance Bachelor DevOps/Fullstack 2026
+      </p>
       
       {/* Liens sociaux */}
       <div className="flex justify-center space-x-6 mb-8">
@@ -716,8 +708,31 @@ const Portfolio = () => {
         "Déploiement automatisé sur VPS OVH",
         "Backend Express + MariaDB (Drizzle ORM)"
       ],
-      new: true
+      new: false
     },
+    {
+      id: 5,
+      title: "FitZoneShop",
+      category: "web",
+      description: "Plateforme e-commerce complète pour produits de fitness avec administration avancée, gestion des commandes et authentification 2FA.",
+      github: "https://github.com/rf69100/FitZoneShopFinal",
+      link: "", // À remplir si vous déployez le projet
+      techs: ["Laravel 12", "React 19", "TypeScript", "Inertia.js", "Tailwind CSS 4", "MariaDB", "Pest PHP"],
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+      features: [
+        "E-commerce complet avec panier et wishlist",
+        "Authentification sécurisée avec 2FA (Laravel Fortify)",
+        "Dashboard administrateur avec statistiques en temps réel",
+        "Gestion complète produits, commandes et clients",
+        "Merge automatique panier invité vers utilisateur connecté",
+        "Interface moderne avec Radix UI et Lucide icons",
+        "42 tests automatisés avec Pest PHP (73% couverture)",
+        "Architecture monolithique moderne avec Inertia.js",
+        "Système de rôles (Customer/Admin) et protection des routes",
+        "Design responsive avec dark mode ready"
+      ],
+      new: true
+    }
   ];
 
   // Effet pour simuler le chargement
