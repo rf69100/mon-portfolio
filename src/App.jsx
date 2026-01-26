@@ -7,16 +7,16 @@ import { hero, parcours as parcoursData, contact as contactData, projects } from
 // ============================================================================
 
 const NAVIGATION_ITEMS = [
-  { href: '#accueil', label: 'Accueil', icon: '🏠' },
-  { href: '#projets', label: 'Projets', icon: '💼' },
-  { href: '#competences', label: 'Compétences', icon: '⚡' },
-  { href: '#contact', label: 'Contact', icon: '📧' }
+  { href: '#accueil', label: 'Accueil' },
+  { href: '#projets', label: 'Projets' },
+  { href: '#competences', label: 'Compétences' },
+  { href: '#contact', label: 'Contact' }
 ];
 
 const NAVIGATION_ITEMS_MOBILE = [
-  { href: '#accueil', label: 'Accueil', icon: '🏠' },
-  { href: '#projets', label: 'Projets', icon: '💼' },
-  { href: '#competences', label: 'Skills', icon: '⚡' }
+  { href: '#accueil', label: 'Accueil'},
+  { href: '#projets', label: 'Projets' },
+  { href: '#competences', label: 'Skills' }
 ];
 
 const FILTER_OPTIONS = ["all", "web"];
@@ -190,7 +190,6 @@ const Header = () => {
             className="flex items-center space-x-2 text-gray-300 hover:text-white transition-all text-sm"
             aria-label="Naviguer vers Contact"
           >
-            <span className="text-xl">📧</span>
             <span className="font-medium">Contact</span>
           </a>
         </nav>
@@ -274,7 +273,6 @@ const Accueil = () => (
           aria-label="Télécharger mon CV"
         >
           <span className="flex items-center space-x-2">
-            <span>📄</span>
             <span>Télécharger CV</span>
           </span>
         </a>
@@ -283,7 +281,6 @@ const Accueil = () => (
           className="px-8 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-white font-bold hover:bg-white/10 transition-all hover:scale-105"
         >
           <span className="flex items-center space-x-2">
-            <span>💬</span>
             <span>Me contacter</span>
           </span>
         </a>
@@ -549,7 +546,7 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                 }`}
                 aria-pressed={activeFilter === filter}
               >
-                {filter === 'all' ? '✨ Tous' : '🌐 Web'}
+                {filter === 'all' ? ' Tous' : ' Web'}
               </button>
             ))}
           </div>
@@ -620,7 +617,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                           aria-label={`Voir le code de ${project.title}`}
                         >
                           <span className="flex items-center justify-center space-x-1">
-                            <span>📁</span>
                             <span>Code</span>
                           </span>
                         </a>
@@ -635,7 +631,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                           aria-label={`Voir la démo de ${project.title}`}
                         >
                           <span className="flex items-center justify-center space-x-1">
-                            <span>🚀</span>
                             <span>Demo</span>
                           </span>
                         </a>
@@ -677,7 +672,6 @@ const Contact = () => {
           <div className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30">
             <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
             <span className="text-green-400 font-bold">{contactData.availability.status}</span>
-            <span className="text-gray-400">•</span>
             <span className="text-gray-400">{contactData.mission.dates}</span>
           </div>
         </div>
@@ -689,7 +683,6 @@ const Contact = () => {
             href="mailto:fonseca.ryan69100@gmail.com"
             className="group p-8 rounded-2xl bg-blue-500/10 backdrop-blur-xl border border-blue-500/30 hover:border-blue-500/50 transition-all hover:scale-105"
           >
-            <div className="text-4xl mb-4">📧</div>
             <h3 className="text-blue-400 font-bold text-lg mb-2">EMAIL</h3>
             <p className="text-gray-300 text-sm break-all group-hover:text-blue-400 transition-colors">
               fonseca.ryan69100@gmail.com
@@ -701,7 +694,6 @@ const Contact = () => {
             href="tel:+33745352307"
             className="group p-8 rounded-2xl bg-purple-500/10 backdrop-blur-xl border border-purple-500/30 hover:border-purple-500/50 transition-all hover:scale-105"
           >
-            <div className="text-4xl mb-4">📱</div>
             <h3 className="text-purple-400 font-bold text-lg mb-2">TÉLÉPHONE</h3>
             <p className="text-gray-300 text-lg group-hover:text-purple-400 transition-colors font-medium">
               07 45 35 23 07
@@ -710,7 +702,6 @@ const Contact = () => {
 
           {/* Localisation */}
           <div className="p-8 rounded-2xl bg-green-500/10 backdrop-blur-xl border border-green-500/30">
-            <div className="text-4xl mb-4">📍</div>
             <h3 className="text-green-400 font-bold text-lg mb-2">LOCALISATION</h3>
             <p className="text-gray-300 text-lg font-medium">
               Lyon 5ème, 69005
@@ -744,7 +735,6 @@ const Contact = () => {
             className="relative block text-center py-6 rounded-2xl bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold text-xl transition-all hover:scale-105 shadow-2xl"
           >
             <span className="flex items-center justify-center space-x-3">
-              <span className="text-2xl">🚀</span>
               <span>{contactData.cta}</span>
             </span>
           </a>
