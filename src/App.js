@@ -728,7 +728,7 @@ const Portfolio = () => {
       category: "web",
       description: "Simulation complète de stratégie F1 avec données 2026, calculs physiques avancés et interface de course réaliste.",
       github: "https://github.com/rf69100/f1-strategy-simulator",
-      link: "https://f1-strategy-simulator-test.vercel.app",
+      link: "/f1-strategy-simulator/",
       techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
       image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
       features: [
