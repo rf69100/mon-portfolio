@@ -133,18 +133,35 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Navigation Mobile - TOUT SUR UNE LIGNE */}
-          <nav className="md:hidden flex items-center space-x-1">
-            {NAVIGATION_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="px-2 py-1.5 text-gray-300 hover:text-white transition-all text-xs font-semibold"
-                aria-label={`Naviguer vers ${item.label}`}
-              >
-                {item.label}
-              </a>
-            ))}
+          {/* Navigation Mobile - 2 LIGNES */}
+          <nav className="md:hidden flex flex-col items-center space-y-2">
+            {/* Première ligne : 3 liens */}
+            <div className="flex items-center space-x-2">
+              {NAVIGATION_ITEMS.slice(0, 3).map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-1.5 text-gray-300 hover:text-white transition-all text-xs font-semibold"
+                  aria-label={`Naviguer vers ${item.label}`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            
+            {/* Deuxième ligne : 2 liens */}
+            <div className="flex items-center space-x-2">
+              {NAVIGATION_ITEMS.slice(3).map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-1.5 text-gray-300 hover:text-white transition-all text-xs font-semibold"
+                  aria-label={`Naviguer vers ${item.label}`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </nav>
 
           {/* Réseaux sociaux */}
