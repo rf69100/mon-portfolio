@@ -3,14 +3,28 @@
 // ============================================================================
 
 /**
+ * Informations personnelles
+ */
+export const personalInfo = {
+  name: "RYAN FONSECA",
+  title: "Développeur Fullstack",
+  email: "fonseca.ryan69100@gmail.com",
+  phone: "07 45 35 23 07",
+  location: "Lyon 5ème, 69005",
+  linkedin: "https://www.linkedin.com/in/ryan-fonseca-3a73b2302/",
+  github: "https://github.com/rf69100"
+};
+
+/**
  * Section Hero / Accueil
  */
 export const hero = {
-  intro: "Étudiant en BTS SIO SLAM, je développe des applications web complètes avec une approche axée sur l'innovation et la qualité du code.",
-  techs: "React • Laravel • TypeScript • MySQL",
-  formation: "BTS SIO SLAM - Campus Numérique in the Alps",
-  searchStatus: "🎯 EN RECHERCHE D'ALTERNANCE",
-  searchDetails: "Bachelor DevOps / Fullstack (Rentrée 2026)"
+  intro: "Développeur web passionné par la création d'applications modernes et performantes. Expérience concrète en React, Laravel et gestion de projets fullstack.",
+  techs: "React • Laravel",
+  formation: "BTS SIO SLAM • 2024-2026",
+  context: "Stage validé chez APICIL (2026)",
+  searchStatus: "RECHERCHE ACTIVE : Alternance Rentrée 2026",
+  searchDetails: "Bachelor DevOps ou Fullstack"
 };
 
 /**
@@ -19,38 +33,47 @@ export const hero = {
 export const parcours = [
   {
     number: 1,
-    title: "BAC PRO SN",
-    date: "2018 - 2021",
-    school: "Lycée Carriat - Bourg-en-Bresse",
-    description: "Baccalauréat Professionnel Systèmes Numériques option RISC (Réseaux Informatiques et Systèmes Communicants). Formation aux bases de l'informatique et des réseaux.",
+    title: "Baccalauréat Général",
     color: "cyan",
+    date: "2021 - 2024",
+    school: "Lycée Frédéric Fays",
+    description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques).",
     progress: 100
   },
   {
     number: 2,
-    title: "MC CDI",
-    date: "2021 - 2022",
-    school: "GRETA - Villeurbanne",
-    description: "Mention Complémentaire Cyberdéfense et Infrastructures. Spécialisation en sécurité informatique, protection des systèmes et gestion des infrastructures réseau.",
+    title: "BTS SIO Option SLAM",
     color: "blue",
-    progress: 100
+    date: "2024 - 2026",
+    school: "Lycée Les Chassagnes",
+    description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
+    progress: 75
   },
   {
     number: 3,
-    title: "BTS SIO",
-    date: "2024 - 2026",
-    school: "Campus Numérique in the Alps",
-    description: "BTS Services Informatiques aux Organisations option SLAM. Formation au développement d'applications, gestion de bases de données et méthodologies agiles. Stage validé chez APICIL.",
-    color: "purple",
-    progress: 50
+    title: "Stage Développeur Web",
+    color: "orange",
+    date: "2025",
+    school: "Les Chassagnes",
+    description: "Développement d'une application de gestion de stages en Laravel.",
+    progress: 100
   },
   {
     number: 4,
-    title: "BACHELOR",
-    date: "2026 - 2027",
-    school: "En recherche",
-    description: "Objectif : Bachelor DevOps ou Fullstack pour approfondir mes compétences en développement et intégration continue. Recherche active d'alternance pour septembre 2026.",
+    title: "Stage Développeur Web",
+    color: "purple",
+    date: "Janvier - Février 2026",
+    school: "APICIL",
+    description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
+    progress: 0
+  },
+  {
+    number: 5,
+    title: "Bachelor DevOps / Fullstack",
     color: "green",
+    date: "Rentrée 2026",
+    school: "En recherche d'alternance",
+    description: "Poursuite d'études en alternance pour approfondir les compétences DevOps, CI/CD, cloud et architecture fullstack.",
     progress: 0
   }
 ];
@@ -59,15 +82,15 @@ export const parcours = [
  * Section Contact
  */
 export const contact = {
-  availability: {
-    status: "DISPONIBLE",
-    detail: "Septembre 2026"
-  },
   mission: {
-    title: "Bachelor DevOps / Fullstack",
-    dates: "Sept. 2026 - Juin 2027"
+    title: "Alternance Développeur Web/DevOps",
+    dates: "Rentrée 2026 (rythme entreprise/école)"
   },
-  cta: "🚀 LANCER LA MISSION"
+  availability: {
+    status: "DISPONIBLE IMMÉDIATEMENT",
+    detail: "Pour entretiens et échanges sur votre projet d'alternance"
+  },
+  cta: "ÉCHANGER SUR UNE ALTERNANCE"
 };
 
 /**
