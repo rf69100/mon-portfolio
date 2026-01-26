@@ -69,7 +69,7 @@ export const parcours = [
   },
   {
     number: 5,
-    title: "Bachelor DevOps / Fullstack",
+    title: "Bachelor Developpeur Fullstack",
     color: "green",
     date: "Rentrée 2026",
     school: "En recherche d'alternance",
