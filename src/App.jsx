@@ -132,26 +132,22 @@ const Header = () => {
                 className="group relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300"
                 aria-label={`Naviguer vers ${item.label}`}
               >
-                <span className="flex items-center space-x-2">
-                  <span>{item.icon}</span>
-                  <span className="font-medium">{item.label}</span>
-                </span>
+                <span className="font-medium">{item.label}</span>
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
               </a>
             ))}
           </nav>
 
-          {/* Navigation Mobile */}
+          {/* Navigation Mobile - TOUT SUR UNE LIGNE */}
           <nav className="md:hidden flex items-center space-x-1">
-            {NAVIGATION_ITEMS_MOBILE.map((item) => (
+            {NAVIGATION_ITEMS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="px-2 py-1.5 text-gray-300 hover:text-white transition-all text-sm"
+                className="px-2 py-1.5 text-gray-300 hover:text-white transition-all text-xs font-semibold"
                 aria-label={`Naviguer vers ${item.label}`}
-                title={item.label}
               >
-                <span className="text-xl">{item.icon}</span>
+                {item.label}
               </a>
             ))}
           </nav>
@@ -182,17 +178,6 @@ const Header = () => {
             </a>
           </div>
         </div>
-
-        {/* Contact mobile */}
-        <nav className="md:hidden flex justify-center mt-3 pt-3 border-t border-blue-500/20">
-          <a
-            href="#contact"
-            className="flex items-center space-x-2 text-gray-300 hover:text-white transition-all text-sm"
-            aria-label="Naviguer vers Contact"
-          >
-            <span className="font-medium">Contact</span>
-          </a>
-        </nav>
       </div>
     </header>
   );
@@ -546,7 +531,7 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                 }`}
                 aria-pressed={activeFilter === filter}
               >
-                {filter === 'all' ? ' Tous' : ' Web'}
+                {filter === 'all' ? 'Tous' : 'Web'}
               </button>
             ))}
           </div>
@@ -672,7 +657,7 @@ const Contact = () => {
           <div className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30">
             <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
             <span className="text-green-400 font-bold">{contactData.availability.status}</span>
-            <span className="text-gray-400">{contactData.mission.dates}</span>
+            <span className="text-gray-400"> • {contactData.mission.dates}</span>
           </div>
         </div>
 
