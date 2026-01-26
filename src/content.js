@@ -314,7 +314,11 @@ export const contact = {
       value: "Lyon 5ème, 69005",
       color: "green"
     }
-  ]
+  ],
+  nextStep: {
+    title: "PROCHAIN DÉPART",
+    subtitle: "En attente de votre signal"
+  }
 };
 
 /**
@@ -348,7 +352,6 @@ export const sectionsHeaders = {
  */
 export const loaderConfig = {
   name: personalInfo.name,
-  initials: personalInfo.initials,
   message: "Chargement du portfolio..."
 };
 
@@ -368,4 +371,57 @@ export const socialIcons = {
     open: "M6 18L18 6M6 6l12 12",
     closed: "M4 6h16M4 12h16M4 18h16"
   }
+};
+
+/**
+ * Styles des cartes pour les compétences
+ */
+export const skillsCardStyles = {
+  purple: 'bg-gradient-to-br from-purple-900/30 to-purple-800/20 border-2 border-purple-500/60 shadow-purple-500/40',
+  blue: 'bg-gradient-to-br from-blue-900/30 to-blue-800/20 border-2 border-blue-500/60 shadow-blue-500/40',
+  green: 'bg-gradient-to-br from-green-900/30 to-green-800/20 border-2 border-green-500/60 shadow-green-500/40',
+  yellow: 'bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 border-2 border-yellow-500/60 shadow-yellow-500/40'
+};
+
+/**
+ * Couleurs des titres pour les compétences
+ */
+export const skillsTitleColors = {
+  purple: 'text-purple-300',
+  blue: 'text-blue-300',
+  green: 'text-green-300',
+  yellow: 'text-yellow-300'
+};
+
+/**
+ * Styles des cartes pour le parcours
+ */
+export const parcoursCardStyles = {
+  cyan: 'bg-gradient-to-br from-cyan-900/30 to-cyan-800/20 border-cyan-400 shadow-cyan-500/50',
+  blue: 'bg-gradient-to-br from-blue-900/30 to-blue-800/20 border-blue-400 shadow-blue-500/50',
+  orange: 'bg-gradient-to-br from-orange-900/30 to-orange-800/20 border-orange-400 shadow-orange-500/50',
+  purple: 'bg-gradient-to-br from-purple-900/30 to-purple-800/20 border-purple-400 shadow-purple-500/50',
+  green: 'bg-gradient-to-br from-green-900/30 to-green-800/20 border-green-400 shadow-green-500/50'
+};
+
+/**
+ * Couleurs des titres pour le parcours
+ */
+export const parcoursTitleColors = {
+  cyan: 'text-cyan-300',
+  blue: 'text-blue-300',
+  orange: 'text-orange-300',
+  purple: 'text-purple-300',
+  green: 'text-green-300'
+};
+
+/**
+ * Styles des badges pour le parcours
+ */
+export const parcoursBadgeStyles = {
+  cyan: 'bg-cyan-500/20 text-cyan-300 border-cyan-400',
+  blue: 'bg-blue-500/20 text-blue-300 border-blue-400',
+  orange: 'bg-orange-500/20 text-orange-300 border-orange-400',
+  purple: 'bg-purple-500/20 text-purple-300 border-purple-400',
+  green: 'bg-green-500/20 text-green-300 border-green-400'
 };

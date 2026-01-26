@@ -12,7 +12,12 @@ import {
   contact,
   sectionsHeaders,
   loaderConfig,
-  socialIcons
+  socialIcons,
+  skillsCardStyles,
+  skillsTitleColors,
+  parcoursCardStyles,
+  parcoursTitleColors,
+  parcoursBadgeStyles
 } from './content';
 
 // ============================================================================
@@ -71,15 +76,15 @@ SocialIcon.propTypes = {
  */
 const SocialLink = ({ platform, href, size = "w-10 h-10", iconSize = "w-5 h-5" }) => {
   const bgClass = platform === 'linkedin' 
-    ? 'bg-blue-600/20 hover:bg-blue-600 border-blue-500/30' 
-    : 'bg-gray-700/20 hover:bg-gray-700 border-gray-600/30';
+    ? 'bg-blue-600 p-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 hover:scale-110' 
+    : 'bg-gray-800 p-2 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-gray-500/50 hover:scale-110 border border-gray-700';
 
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${size} rounded-lg ${bgClass} flex items-center justify-center transition-all duration-300 hover:scale-110 border`}
+      className={bgClass}
       aria-label={platform}
     >
       <SocialIcon platform={platform} size={iconSize} />
@@ -98,19 +103,19 @@ SocialLink.propTypes = {
  * LOADER
  */
 const Loader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+  <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%)'}}>
     <div className="flex flex-col items-center space-y-6">
       <div className="relative">
-        <div className="absolute inset-0 animate-ping">
-          <div className="w-20 h-20 rounded-full bg-blue-500/30"></div>
-        </div>
-        <div className="relative w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 animate-pulse flex items-center justify-center shadow-2xl shadow-blue-500/50">
-          <span className="text-3xl font-bold text-white">{loaderConfig.initials}</span>
-        </div>
+        {/* Animation de spinner gaming */}
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-400 border-solid"></div>
+        {/* Initiales au centre du spinner avec emoji gaming */}
+        <span className="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-blue-400 font-mono">
+          XP
+        </span>
       </div>
       <div className="space-y-2 text-center">
-        <p className="text-white font-semibold text-xl">{loaderConfig.name}</p>
-        <p className="text-blue-300 text-sm animate-pulse">{loaderConfig.message}</p>
+        <p className="text-white font-semibold text-xl font-mono">{loaderConfig.name}</p>
+        <p className="text-blue-300 text-sm animate-pulse font-mono">{loaderConfig.message}</p>
       </div>
     </div>
   </div>
@@ -141,54 +146,51 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       scrolled
-        ? 'bg-slate-900/80 backdrop-blur-xl shadow-2xl border-b border-blue-500/30'
-        : 'bg-slate-900/60 backdrop-blur-lg border-b border-blue-500/20'
+        ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b-2 border-blue-500/50'
+        : 'bg-gray-900/80 backdrop-blur-sm border-b-4 border-blue-700'
     }`}>
-      <div className="container mx-auto px-4 md:px-6 py-4 md:py-5">
+      <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="group flex items-center space-x-3 cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/50 transform group-hover:rotate-12 transition-all duration-300">
-              <span className="text-white font-bold text-lg">{personalInfo.initials}</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                {personalInfo.name}
-              </h1>
-              <p className="text-xs text-blue-300">{personalInfo.title}</p>
+          {/* Logo à gauche avec animation */}
+          <div className="group flex items-center">
+            <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono tracking-widest flex items-center cursor-default">
+              <span className="mr-2 transform group-hover:rotate-12 transition-transform duration-300">🎮</span>
+              <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">MonPortfolio</span>
+              <span className="sm:hidden">MP</span>
             </div>
           </div>
 
-          {/* Navigation Desktop */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Navigation Desktop centrée */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 font-mono absolute left-1/2 transform -translate-x-1/2">
             {navigation.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="group relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300"
-                aria-label={`Naviguer vers ${item.label}`}
+                className="relative text-gray-300 hover:text-blue-400 transition-all duration-300 font-semibold group py-1"
               >
-                <span className="font-medium">{item.label}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
           </nav>
 
-          {/* Bouton Hamburger */}
+          {/* Bouton Hamburger Mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 transition-all"
+            className="md:hidden p-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 transition-all duration-300"
             aria-label="Menu"
           >
-            <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? socialIcons.hamburger.open : socialIcons.hamburger.closed} />
-            </svg>
+            <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+              <span className={`block w-5 h-0.5 bg-blue-400 transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-blue-400 transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-blue-400 transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            </div>
           </button>
 
-          {/* Réseaux sociaux Desktop */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Liens réseaux sociaux Desktop */}
+          <div className="hidden md:flex items-center space-x-3">
             <SocialLink platform="linkedin" href={personalInfo.linkedin} />
             <SocialLink platform="github" href={personalInfo.github} />
           </div>
@@ -196,26 +198,25 @@ const Header = () => {
 
         {/* Menu Mobile */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 py-4 border-t border-blue-500/20 animate-fade-in-down">
-            <div className="flex flex-col space-y-2">
+          <div className="md:hidden mt-4 py-4 border-t border-blue-500/20 bg-gray-900/90 backdrop-blur-md rounded-lg animate-fade-in-down">
+            <nav className="flex flex-col space-y-3">
               {navigation.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-3 text-gray-300 hover:text-white hover:bg-blue-500/10 rounded-lg transition-all text-sm font-semibold"
-                  aria-label={`Naviguer vers ${item.label}`}
+                  className="px-4 py-3 text-gray-300 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-all font-mono font-semibold text-sm"
                 >
                   {item.label}
                 </a>
               ))}
-              
+
               <div className="flex items-center justify-center space-x-4 pt-4 mt-4 border-t border-blue-500/20">
-                <SocialLink platform="linkedin" href={personalInfo.linkedin} />
-                <SocialLink platform="github" href={personalInfo.github} />
+                <SocialLink platform="linkedin" href={personalInfo.linkedin} size="w-10 h-10" iconSize="w-5 h-5" />
+                <SocialLink platform="github" href={personalInfo.github} size="w-10 h-10" iconSize="w-5 h-5" />
               </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         )}
       </div>
     </header>
@@ -226,74 +227,49 @@ const Header = () => {
  * ACCUEIL
  */
 const Accueil = () => (
-  <section id="accueil" className="relative min-h-screen flex items-center justify-center pt-20 pb-16 overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-      </div>
-    </div>
-
-    <div className="container relative z-10 mx-auto px-4 md:px-6 text-center max-w-5xl">
-      <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 backdrop-blur-sm mb-8 animate-fade-in">
-        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        <span className="text-sm text-green-400 font-medium">{hero.badge.text}</span>
-      </div>
-
-      <h1 className="text-5xl md:text-7xl font-bold mb-4 animate-fade-in-up">
-        <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          {personalInfo.name}
-        </span>
+  <section id="accueil" className="pt-32 pb-20 bg-transparent opacity-0 animate-slide-in-bottom">
+    <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
+      {/* Titre principal avec effet dégradé */}
+      <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4 font-mono tracking-widest">
+        {personalInfo.name}
       </h1>
-
-      <h2 className="text-2xl md:text-3xl font-semibold text-gray-300 mb-6 animate-fade-in-up animation-delay-200">
-        {personalInfo.title.split(' ')[0]} <span className="text-blue-400">{personalInfo.title.split(' ')[1]}</span>
+      
+      {/* Sous-titre */}
+      <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 font-mono uppercase tracking-wider">
+        {personalInfo.title}
       </h2>
+      
+      {/* Carte d'informations */}
+      <div className="bg-gray-900/50 border-2 border-blue-500 rounded-xl p-6 mb-8 backdrop-blur-sm">
+        <p className="text-lg md:text-xl text-gray-300 mb-4 font-mono leading-relaxed">
+          {hero.intro}
+        </p>
 
-      <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl mb-8 animate-fade-in-up animation-delay-400">
-        <p className="text-lg text-gray-300 mb-6 leading-relaxed">{hero.intro}</p>
+        <p className="text-lg md:text-xl text-gray-300 mb-4 font-mono">
+          <span className="text-blue-400 font-bold">{hero.techs}</span>
+        </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-          {hero.techs.split(' • ').map((tech, index) => (
-            <span 
-              key={index}
-              className="px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 font-medium hover:bg-blue-500/20 transition-all cursor-default"
-            >
-              {tech}
-            </span>
-          ))}
+        {/* Badge de formation */}
+        <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm mb-2">
+          {hero.formation}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30">
-            <p className="text-purple-400 font-medium">{hero.formation}</p>
-          </div>
-          <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30">
-            <p className="text-green-400 font-medium">{hero.context}</p>
-          </div>
-        </div>
-
-        <div className="p-5 rounded-xl bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30">
-          <p className="text-yellow-400 font-bold text-lg mb-1">{hero.searchStatus}</p>
-          <p className="text-gray-300">{hero.searchDetails}</p>
-        </div>
+        {/* Indicateur de recherche d'alternance */}
+        <p className="text-lg md:text-xl text-yellow-300 font-mono font-bold mt-4">
+          {hero.searchStatus}
+        </p>
+        <p className="text-base md:text-lg text-gray-300 font-mono mt-2">
+          {hero.searchDetails}
+        </p>
       </div>
-
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-600">
-        <a 
-          href={hero.cta.primary.href}
-          download={hero.cta.primary.download}
-          className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/70 transition-all hover:scale-105"
-        >
+      
+      {/* Bouton de téléchargement CV */}
+      <div className="flex justify-center mb-6">
+        <a href={hero.cta.primary.href} download={hero.cta.primary.download} className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
           {hero.cta.primary.text}
         </a>
-        <a 
-          href={hero.cta.secondary.href}
-          className="px-8 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-white font-bold hover:bg-white/10 transition-all hover:scale-105"
-        >
-          {hero.cta.secondary.text}
-        </a>
       </div>
+
     </div>
   </section>
 );
@@ -301,103 +277,111 @@ const Accueil = () => (
 /**
  * COMPETENCES
  */
-const Competences = () => (
-  <section id="competences" className="py-20 bg-gradient-to-b from-slate-900 to-blue-900/50">
-    <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-16 animate-fade-in">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className={`bg-gradient-to-r ${sectionsHeaders.competences.gradient} bg-clip-text text-transparent`}>
-            {sectionsHeaders.competences.title}
-          </span>
+const Competences = () => {
+  return (
+    <section id="competences" className="py-16 md:py-20 bg-transparent opacity-0 animate-slide-in-left animation-delay-200">
+      <div className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 font-mono tracking-tight">
+          {sectionsHeaders.competences.title}
         </h2>
-        <p className="text-gray-400 text-lg">{sectionsHeaders.competences.subtitle}</p>
+        <p className="text-lg md:text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.competences.subtitle}</p>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        {skills.map((skill, index) => (
-          <div 
-            key={skill.title}
-            className={`group relative ${skill.bgColor} backdrop-blur-xl rounded-3xl p-8 border ${skill.borderColor} hover:border-opacity-70 transition-all duration-500 hover:scale-105 animate-fade-in-up`}
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${skill.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl`}></div>
-            
-            <h3 className={`text-xl font-bold ${skill.textColor} mb-6 text-center tracking-wider`}>
-              {skill.title}
-            </h3>
-
-            <div className="grid grid-cols-2 gap-4">
-              {skill.techs.map((tech) => (
-                <div 
-                  key={tech.name}
-                  className="flex flex-col items-center space-y-2 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all cursor-default group/tech"
-                >
-                  <TechIcon tech={tech} />
-                  <span className="text-sm text-gray-300 font-medium text-center group-hover/tech:text-white transition-colors">
-                    {tech.name}
-                  </span>
+      
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-6xl mx-auto">
+          {skills.map((skill, index) => {
+            const colorKey = skill.title === "FRONTEND" ? "purple" : skill.title === "BACKEND" ? "blue" : skill.title === "BASE DE DONNÉES" ? "green" : "yellow";
+            return (
+              <div 
+                key={skill.title} 
+                className={`${skillsCardStyles[colorKey]} rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg transition-all duration-300 hover:scale-105 min-h-[280px] md:min-h-[320px] flex flex-col`}
+              >
+                <h3 className={`text-lg md:text-xl font-bold ${skillsTitleColors[colorKey]} mb-4 md:mb-6 font-mono uppercase tracking-wide text-center`}>
+                  {skill.title}
+                </h3>
+                
+                <div className="grid grid-cols-2 gap-2 md:gap-3 flex-1">
+                  {skill.techs.map((tech) => (
+                    <div 
+                      key={tech.name} 
+                      className="flex items-center gap-2 md:gap-3 p-2 md:p-3"
+                    >
+                      <TechIcon tech={tech} />
+                      <span className="text-white text-sm md:text-base font-mono font-bold flex-1 truncate">
+                        {tech.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /**
  * PARCOURS
  */
-const Parcours = () => (
-  <section id="experience" className="py-20 bg-slate-900">
-    <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-16 animate-fade-in">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className={`bg-gradient-to-r ${sectionsHeaders.parcours.gradient} bg-clip-text text-transparent`}>
-            {sectionsHeaders.parcours.title}
-          </span>
+const Parcours = () => {
+  return (
+    <section id="experience" className="py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-300">
+      <div className="container mx-auto px-6 text-center mb-16">
+        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 font-mono tracking-tight">
+          {sectionsHeaders.parcours.title}
         </h2>
-        <p className="text-gray-400 text-lg">{sectionsHeaders.parcours.subtitle}</p>
+        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.parcours.subtitle}</p>
       </div>
-
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div className="container mx-auto px-6">
+        {/* Grille des étapes du parcours */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {parcours.map((step, index) => {
-            const colors = colorMap[step.color];
+            const colorKey = step.color || 'blue'; // Default to blue if no color specified
             return (
-              <div
-                key={step.number}
-                className="group relative animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`relative ${colors.bg} backdrop-blur-xl rounded-2xl p-6 border ${colors.border} hover:border-opacity-70 transition-all duration-500 hover:scale-105 h-full`}>
-                  <div className={`absolute -top-3 -right-3 w-12 h-12 rounded-xl bg-gradient-to-r ${colors.gradient} flex items-center justify-center shadow-lg`}>
-                    <span className="text-white font-bold">{step.number}</span>
+              <div key={step.number} className="relative group">
+                <div className={`${parcoursCardStyles[colorKey]} border-2 rounded-2xl p-6 h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg`}>
+                  {/* Badge de niveau */}
+                  <div className={`absolute -top-7 left-6 ${parcoursBadgeStyles[colorKey]} border-2 rounded-full px-3 py-0 font-mono font-bold text-sm`}>
+                    LVL {step.number}
                   </div>
-
-                  <div className="space-y-3">
-                    <h3 className={`text-lg font-bold ${colors.text} pr-8`}>{step.title}</h3>
-
-                    <div className="space-y-1">
-                      <p className="text-sm text-gray-400">{step.date}</p>
-                      <p className="text-sm text-gray-400 font-medium">{step.school}</p>
+                  
+                  <h3 className={`text-xl font-bold ${parcoursTitleColors[colorKey]} mb-3 font-mono uppercase tracking-wide mt-4`}>
+                    {step.title}
+                  </h3>
+                  
+                  {/* Informations date et école */}
+                  <div className="mb-4 space-y-1">
+                    <div className="text-gray-400 text-sm font-mono">{step.date}</div>
+                    <div className="text-gray-400 text-sm font-mono">{step.school}</div>
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-gray-300 text-sm leading-relaxed font-mono">
+                    {step.description}
+                  </p>
+                  
+                  {/* Barre de progression */}
+                  <div className="mt-4 bg-gray-800 rounded-full h-2 overflow-hidden">
+                    <div
+                      className={`h-full bg-gradient-to-r ${colorKey === 'cyan' ? 'from-cyan-500 to-cyan-400' :
+                        colorKey === 'blue' ? 'from-blue-500 to-blue-400' :
+                        colorKey === 'orange' ? 'from-orange-500 to-orange-400' :
+                        colorKey === 'purple' ? 'from-purple-500 to-purple-400' :
+                        'from-green-500 to-green-400'} transition-all duration-500`}
+                      style={{width: `${step.progress}%`}}
+                    >
                     </div>
-
-                    <p className="text-sm text-gray-300 leading-relaxed">{step.description}</p>
-
-                    <div className="pt-2">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-400">Progression</span>
-                        <span className={`text-xs font-bold ${colors.text}`}>{step.progress}%</span>
-                      </div>
-                      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full bg-gradient-to-r ${colors.gradient} transition-all duration-1000 ease-out`}
-                          style={{ width: `${step.progress}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                  </div>
+                  
+                  {/* Indicateur de progression */}
+                  <div className="flex justify-between items-center mt-2">
+                    <span className="text-xs text-gray-400 font-mono">Progression</span>
+                    <span className="text-xs font-bold font-mono text-white">
+                      {step.progress}%
+                    </span>
                   </div>
                 </div>
               </div>
@@ -405,9 +389,9 @@ const Parcours = () => (
           })}
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /**
  * PROJETS
@@ -419,105 +403,106 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
   );
 
   return (
-    <section id="projets" className="py-20 bg-gradient-to-b from-blue-900/50 to-slate-900">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className={`bg-gradient-to-r ${sectionsHeaders.projets.gradient} bg-clip-text text-transparent`}>
-              {sectionsHeaders.projets.title}
-            </span>
-          </h2>
-          <p className="text-gray-400 text-lg mb-8">{sectionsHeaders.projets.subtitle}</p>
-
-          <div className="flex justify-center space-x-4">
-            {projectsConfig.filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-6 py-3 rounded-xl font-bold transition-all ${
-                  activeFilter === filter
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white scale-105 shadow-lg shadow-purple-500/50'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
-                }`}
-                aria-pressed={activeFilter === filter}
-              >
-                {projectsConfig.filterLabels[filter]}
-              </button>
-            ))}
-          </div>
-        </div>
-
+    <section id="projets" className="py-20 bg-transparent opacity-0 animate-slide-in-left animation-delay-400">
+      <div className="container mx-auto px-6 text-center mb-16">
+        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 font-mono tracking-tight">
+          {sectionsHeaders.projets.title}
+        </h2>
+        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.projets.subtitle}</p>
+      </div>
+      
+      {/* Boutons de filtrage des projets */}
+      <div className="flex justify-center space-x-4 mb-12">
+        {projectsConfig.filters.map((filter) => (
+          <button 
+            key={filter} 
+            onClick={() => setActiveFilter(filter)}
+            className={`px-6 py-3 rounded-full font-mono font-bold uppercase transition-all ${
+              activeFilter === filter 
+                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white scale-110 shadow-lg' 
+                : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:scale-105'
+            }`}
+          >
+            {projectsConfig.filterLabels[filter]}
+          </button>
+        ))}
+      </div>
+      
+      {/* Grille des projets filtrés */}
+      <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {filteredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="group relative animate-fade-in-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 h-full flex flex-col">
-                {project.new && (
-                  <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold shadow-lg animate-pulse">
-                    ⭐ NEW
-                  </div>
-                )}
-
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-                </div>
-
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-gray-400 text-sm mb-4 flex-1 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+          {filteredProjects.map((project, index) => {
+            const projectLink = project.link ? `${PROJECT_BASE_URL}${project.link}` : null;
+            return (
+              <div 
+                key={project.id} 
+                className="relative group"
+              >
+                <div className={`bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-2 border-purple-400 rounded-2xl overflow-hidden shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 h-full flex flex-col ${projectLink ? 'cursor-pointer' : ''}`}
+                     onClick={() => projectLink && window.open(projectLink, '_blank')}>
+                  {/* Badge NEW sur les projets récents */}
+                  {project.new === true && (
+                    <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
+                      ⭐ NEW
+                    </div>
+                  )}
+                  {/* Image du projet */}
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
                   </div>
 
-                  <div className="flex gap-3">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-center px-4 py-2.5 rounded-xl bg-gray-700/30 hover:bg-gray-700 text-white font-medium transition-all hover:scale-105 border border-gray-600/30"
-                      >
-                        Code
-                      </a>
-                    )}
-                    {project.link && (
-                      <a
-                        href={`${PROJECT_BASE_URL}${project.link}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 text-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all hover:scale-105 shadow-lg shadow-blue-500/30"
-                      >
-                        Demo
-                      </a>
-                    )}
+                  {/* Contenu du projet */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold text-purple-300 mb-2 font-mono uppercase tracking-wide">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm mb-4 font-mono flex-1">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tags des technologies utilisées */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.techs.map((tech) => (
+                        <span key={tech} className="text-xs px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400 font-mono font-semibold">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Boutons d'action */}
+                    <div className="flex gap-2">
+                      {project.github && (
+                        <a 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex-1 text-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm border border-gray-600" 
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          GitHub
+                        </a>
+                      )}
+                      {project.link && (
+                        <a 
+                          href={`${PROJECT_BASE_URL}${project.link}`}
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm" 
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Live
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -533,75 +518,124 @@ Projets.propTypes = {
  * CONTACT
  */
 const Contact = () => (
-  <section id="contact" className="py-20 bg-slate-900">
-    <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-      <div className="text-center mb-16 animate-fade-in">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className={`bg-gradient-to-r ${sectionsHeaders.contact.gradient} bg-clip-text text-transparent`}>
-            {contact.title}
-          </span>
+  <section id="contact" className="py-20 bg-transparent opacity-0 animate-slide-in-bottom animation-delay-500">
+    <div className="container mx-auto px-6 max-w-6xl">
+      <div className="text-center mb-16">
+        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4 font-mono tracking-tight">
+          {contact.title}
         </h2>
-        <p className="text-gray-400 text-lg mb-6">{contact.subtitle}</p>
-        
-        <div className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30">
-          <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
-          <span className="text-green-400 font-bold">{contact.availability.status}</span>
-          <span className="text-gray-400"> • {contact.mission.dates}</span>
+        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{contact.subtitle}</p>
+        <div className="mt-6 inline-block bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-2 rounded-full font-mono font-bold text-sm">
+          {contact.mission.dates}
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        {contact.cards.map((card) => {
-          const colorClasses = {
-            blue: 'bg-blue-500/10 border-blue-500/30 hover:border-blue-500/50 text-blue-400',
-            purple: 'bg-purple-500/10 border-purple-500/30 hover:border-purple-500/50 text-purple-400',
-            green: 'bg-green-500/10 border-green-500/30 text-green-400'
-          };
-
-          const Element = card.href ? 'a' : 'div';
+      
+      {/* Design créatif en hexagones */}
+      <div className="bg-gradient-to-br from-gray-900/80 to-blue-900/50 rounded-2xl p-8 border-2 border-blue-400 shadow-2xl shadow-blue-500/30 backdrop-blur-sm">
+        
+        {/* Grille hexagonale créative */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           
-          return (
-            <Element
-              key={card.type}
-              {...(card.href && { href: card.href })}
-              className={`group p-8 rounded-2xl backdrop-blur-xl border transition-all hover:scale-105 ${colorClasses[card.color]}`}
-            >
-              <h3 className={`${colorClasses[card.color].split(' ').pop()} font-bold text-lg mb-2`}>
-                {card.title}
-              </h3>
-              <p className={`text-gray-300 ${card.type === 'email' ? 'text-sm break-all' : 'text-lg font-medium'} group-hover:${colorClasses[card.color].split(' ').pop()} transition-colors`}>
-                {card.value}
-              </p>
-            </Element>
-          );
-        })}
-      </div>
+          {/* Colonne centrale - Mission */}
+          <div className="space-y-6">
+            {/* Mission principale */}
+            <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border-2 border-purple-500/50 rounded-2xl p-6 text-center hover:scale-105 transition-transform duration-300">
+              <h3 className="text-purple-300 font-mono font-bold text-lg uppercase mb-2">MISSION RECHERCHÉE</h3>
+              <div className="text-white font-mono text-xl font-bold mb-2">{contact.mission.title}</div>
+              <div className="text-gray-300 font-mono text-sm">{contact.mission.dates}</div>
+            </div>
 
-      <div className="p-8 rounded-2xl bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-xl border border-purple-500/30 mb-10">
-        <div className="text-center space-y-4">
-          <h3 className="text-2xl font-bold text-white">{contact.mission.title}</h3>
-          <p className="text-gray-300">{contact.availability.detail}</p>
-          <div className="flex flex-wrap justify-center gap-3 pt-4">
-            {contact.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-4 py-2 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 font-medium"
+            {/* Disponibilité */}
+            <div className="bg-gradient-to-br from-green-600/20 to-emerald-600/20 border-2 border-green-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-green-300 font-mono font-bold uppercase">DISPONIBILITÉ</div>
+              </div>
+              <div className="text-white font-mono text-lg font-bold mb-2">{contact.availability.status}</div>
+              <div className="text-gray-400 font-mono text-sm mb-3">{contact.availability.detail}</div>
+              <div className="bg-gray-800 rounded-full h-2 overflow-hidden">
+                <div className="bg-gradient-to-r from-green-500 to-emerald-400 h-full w-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Colonne gauche - Contact */}
+          <div className="space-y-6">
+            {/* Email - Carte principale */}
+            <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border-2 border-blue-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-blue-300 font-mono font-bold uppercase">EMAIL</div>
+              </div>
+              <a 
+                href={contact.cards[0].href}
+                className="text-white font-mono text-lg font-bold hover:text-blue-300 transition-colors block break-all"
               >
-                {tech}
-              </span>
-            ))}
+                {contact.cards[0].value}
+              </a>
+            </div>
+
+            {/* Téléphone */}
+            <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border-2 border-purple-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-purple-300 font-mono font-bold uppercase">TÉLÉPHONE</div>
+              </div>
+              <a 
+                href={contact.cards[1].href}
+                className="text-white font-mono text-lg font-bold hover:text-purple-300 transition-colors block"
+              >
+                {contact.cards[1].value}
+              </a>
+            </div>
+
+            {/* Localisation */}
+            <div className="bg-gradient-to-br from-green-600/20 to-blue-600/20 border-2 border-green-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-green-300 font-mono font-bold uppercase">LOCALISATION</div>
+              </div>
+              <div className="text-white font-mono text-lg font-bold">{contact.cards[2].value}</div>
+            </div>
+          </div>
+
+          {/* Colonne droite - Compétences */}
+          <div className="space-y-6">
+            {/* Spécialités */}
+            <div className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 border-2 border-yellow-500/50 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-yellow-300 font-mono font-bold uppercase">SPÉCIALITÉS</div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {contact.techStack.map((tech, index) => (
+                    <span 
+                      key={tech}
+                      className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 px-3 py-2 rounded-lg text-sm font-mono font-bold hover:scale-110 transition-transform duration-200"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Carte supplémentaire créative */}
+            <div className="bg-gradient-to-br from-gray-700/30 to-gray-800/30 border-2 border-gray-600/50 rounded-2xl p-6 text-center">
+              <div className="text-white font-mono font-bold mb-2">{contact.nextStep.title}</div>
+              <div className="text-gray-300 font-mono text-sm">{contact.nextStep.subtitle}</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur-2xl opacity-30 animate-pulse"></div>
-        <a
-          href={`mailto:${personalInfo.email}`}
-          className="relative block text-center py-6 rounded-2xl bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold text-xl transition-all hover:scale-105 shadow-2xl"
-        >
-          {contact.cta}
-        </a>
+        {/* Bouton d'action principal - Design créatif */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="relative bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white py-5 rounded-2xl transition-all font-mono font-bold uppercase tracking-wider text-xl text-center shadow-2xl hover:shadow-3xl hover:scale-105 block border-2 border-white/20"
+          >
+            <span className="flex items-center justify-center gap-3">
+              {contact.cta}
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -611,29 +645,25 @@ const Contact = () => (
  * FOOTER
  */
 const Footer = () => (
-  <footer className="bg-slate-950 border-t border-blue-500/20 py-12">
+  <footer className="bg-gray-900 text-white py-12 border-t-4 border-blue-700">
     <div className="container mx-auto px-6 text-center">
-      <div className="flex items-center justify-center space-x-3 mb-6">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg">
-          <span className="text-white font-bold text-xl">{personalInfo.initials}</span>
-        </div>
-        <div className="text-left">
-          <h3 className="text-xl font-bold text-white">{personalInfo.name}</h3>
-          <p className="text-sm text-blue-400">{personalInfo.title}</p>
-        </div>
+      {/* Logo footer */}
+      <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 font-mono flex items-center justify-center">
+        {personalInfo.name}
       </div>
-
-      <p className="text-gray-400 mb-6 max-w-2xl mx-auto">{personalInfo.tagline}</p>
-
-      <div className="flex justify-center space-x-4 mb-8">
+      <p className="text-gray-400 mb-6 font-mono uppercase tracking-wider">
+        {personalInfo.tagline}
+      </p>
+      
+      {/* Liens sociaux */}
+      <div className="flex justify-center space-x-6 mb-8">
         <SocialLink platform="linkedin" href={personalInfo.linkedin} size="w-12 h-12" iconSize="w-6 h-6" />
         <SocialLink platform="github" href={personalInfo.github} size="w-12 h-12" iconSize="w-6 h-6" />
       </div>
-
-      <div className="pt-6 border-t border-gray-800">
-        <p className="text-gray-500 text-sm">
-          © 2025 {personalInfo.name} • Tous droits réservés
-        </p>
+      
+      {/* Copyright */}
+      <div className="border-t border-gray-700 pt-6">
+        <p className="text-gray-500 font-mono text-sm">© 2025 {personalInfo.name}</p>
       </div>
     </div>
   </footer>
@@ -650,9 +680,48 @@ const Portfolio = () => {
     const timer = setTimeout(() => setLoading(false), 1500);
     document.documentElement.style.scrollBehavior = 'smooth';
     
+    // Gérer l'URL au rafraîchissement - revenir à l'accueil
+    const handleLoad = () => {
+      if (window.location.hash && window.location.hash !== '#accueil') {
+        // Si on a un hash dans l'URL, on scroll vers cette section
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Sinon, on clear l'URL et on reste en haut
+        window.history.replaceState(null, null, ' ');
+      }
+    };
+
+    // Observer pour les animations de glissement
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observer toutes les sections
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Gérer le load de la page
+    window.addEventListener('load', handleLoad);
+
     return () => {
       clearTimeout(timer);
       document.documentElement.style.scrollBehavior = '';
+      observer.disconnect();
+      window.removeEventListener('load', handleLoad);
     };
   }, []);
 
