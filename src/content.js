@@ -15,7 +15,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/ryan-fonseca-3a73b2302/",
   github: "https://github.com/rf69100",
   initials: "RF",
-  tagline: "Étudiant BTS SIO SLAM • Stage APICIL validé • Recherche alternance Bachelor DevOps/Fullstack 2026"
+  tagline: "Étudiant BTS SIO SLAM • Stage en cours chez APICIL  • Recherche alternance Bachelor Developpeur Fullstack 2026"
 };
 
 /**
