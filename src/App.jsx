@@ -23,7 +23,8 @@ const FILTER_OPTIONS = ["all", "web"];
 
 const GRADIENT_TEXT_CLASS = "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500";
 
-const PROJECT_BASE_URL = import.meta.env.VITE_PROJECT_BASE_URL || '';
+// Pour Create React App, utilise process.env au lieu de import.meta.env
+const PROJECT_BASE_URL = process.env.REACT_APP_PROJECT_BASE_URL || '';
 
 // ============================================================================
 // COMPOSANTS UTILITAIRES
