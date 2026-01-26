@@ -1,62 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { hero, parcours as parcoursData, contact as contactData, projects } from './content';
+import { useState, useEffect } from 'react';
+import { hero, parcours as parcoursData, contact as contactData } from './content';
 
-// ============================================================================
-// CONSTANTES GLOBALES
-// ============================================================================
-
-const NAVIGATION_ITEMS = [
-  { href: '#accueil', label: 'Accueil' },
-  { href: '#projets', label: 'Projets' },
-  { href: '#competences', label: 'Compétences' },
-  { href: '#contact', label: 'Contact' }
-];
-
-const NAVIGATION_ITEMS_MOBILE = [
-  { href: '#accueil', label: 'Accueil' },
-  { href: '#projets', label: 'Projets' },
-  { href: '#competences', label: 'Skills' }
-];
-
-const FILTER_OPTIONS = ["all", "web"];
-
-const GRADIENT_TEXT_CLASS = "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500";
-
-const PROJECT_BASE_URL = import.meta.env.VITE_PROJECT_BASE_URL || '';
-
-// ============================================================================
-// COMPOSANTS UTILITAIRES
-// ============================================================================
-
-/**
- * TechIcon - Icône de technologie avec gestion d'erreur React-friendly
- */
-const TechIcon = ({ tech }) => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    return <span className="text-lg md:text-xl">💻</span>;
-  }
-
-  return (
-    <img 
-      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-original.svg`}
-      alt={tech.name}
-      className="w-8 h-8 md:w-10 md:h-10 object-contain filter brightness-125"
-      loading="lazy"
-      decoding="async"
-      onError={() => setHasError(true)}
-    />
-  );
-};
-
-TechIcon.propTypes = {
-  tech: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired
-  }).isRequired
-};
 
 /**
  * LOADER - Composant d'animation de chargement
@@ -84,19 +28,10 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let ticking = false;
-    
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 50);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -119,12 +54,16 @@ const Header = () => {
 
           {/* Navigation centrée - Desktop */}
           <nav className="hidden md:flex space-x-6 lg:space-x-8 font-mono justify-center">
-            {NAVIGATION_ITEMS.map((item) => (
+            {[
+              { href: '#accueil', label: 'Accueil' },
+              { href: '#projets', label: 'Projets' },
+              { href: '#competences', label: 'Compétences' },
+              { href: '#contact', label: 'Contact' }
+            ].map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className="relative text-gray-300 hover:text-blue-400 transition-all duration-300 font-semibold group py-1"
-                aria-label={`Naviguer vers ${item.label}`}
               >
                 {item.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
@@ -134,12 +73,15 @@ const Header = () => {
 
           {/* Navigation mobile centrée */}
           <nav className="md:hidden flex space-x-3 font-mono justify-center">
-            {NAVIGATION_ITEMS_MOBILE.map((item) => (
+            {[
+              { href: '#accueil', label: 'Accueil' },
+              { href: '#projets', label: 'Projets' },
+              { href: '#competences', label: 'Skills' }
+            ].map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className="text-gray-300 hover:text-blue-400 transition-all text-xs font-semibold hover:scale-110 transform duration-200"
-                aria-label={`Naviguer vers ${item.label}`}
               >
                 {item.label}
               </a>
@@ -153,10 +95,9 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="relative group"
-              aria-label="Voir mon profil LinkedIn (ouvre dans un nouvel onglet)"
             >
               <div className="bg-blue-600 p-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 hover:scale-110">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="" role="presentation" className="w-5 h-5" loading="lazy" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-5 h-5" />
               </div>
             </a>
             <a
@@ -164,10 +105,9 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="relative group"
-              aria-label="Voir mon profil GitHub (ouvre dans un nouvel onglet)"
             >
               <div className="bg-gray-800 p-2 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-gray-500/50 hover:scale-110 border border-gray-700">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" role="presentation" className="w-5 h-5 filter invert" loading="lazy" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-5 h-5 filter invert" />
               </div>
             </a>
           </div>
@@ -178,7 +118,6 @@ const Header = () => {
           <a
             href="#contact"
             className="text-gray-300 hover:text-blue-400 transition-all text-xs font-semibold hover:scale-110 transform duration-200"
-            aria-label="Naviguer vers Contact"
           >
             Contact
           </a>
@@ -196,7 +135,7 @@ const Accueil = () => (
   <section id="accueil" className="pt-32 pb-20 bg-transparent fade-in">
     <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
       {/* Titre principal avec effet dégradé */}
-      <h1 className={`text-4xl md:text-6xl font-extrabold ${GRADIENT_TEXT_CLASS} mb-4 font-mono tracking-widest`}>
+      <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4 font-mono tracking-widest">
         RYAN FONSECA
       </h1>
       
@@ -231,12 +170,7 @@ const Accueil = () => (
       
       {/* Bouton de téléchargement CV */}
       <div className="flex justify-center mb-6">
-        <a 
-          href="/ryan_fonseca_cv.pdf" 
-          download 
-          className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50"
-          aria-label="Télécharger mon CV au format PDF"
-        >
+        <a href="/ryan_fonseca_cv.pdf" download className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
           TÉLÉCHARGER CV
         </a>
       </div>
@@ -339,7 +273,18 @@ const Competences = () => {
                     key={tech.name} 
                     className="flex items-center gap-2 md:gap-3 p-2 md:p-3"
                   >
-                    <TechIcon tech={tech} />
+                    <img 
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-original.svg`} 
+                      alt={tech.name} 
+                      className="w-8 h-8 md:w-10 md:h-10 object-contain filter brightness-125" 
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        const fallback = document.createElement('span');
+                        fallback.className = 'text-lg md:text-xl';
+                        fallback.textContent = '💻';
+                        e.target.parentNode.insertBefore(fallback, e.target.nextSibling);
+                      }}
+                    />
                     <span className="text-white text-sm md:text-base font-mono font-bold flex-1 truncate">
                       {tech.name}
                     </span>
@@ -460,12 +405,9 @@ const Parcours = () => {
  * PROJETS - Section des projets réalisés
  * Affiche les projets avec filtrage par catégorie
  */
-const Projets = ({ activeFilter, setActiveFilter }) => {
-  // Filtrage des projets selon la catégorie active avec mémoïsation
-  const filteredProjects = useMemo(
-    () => activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter),
-    [activeFilter]
-  );
+const Projets = ({ projects, activeFilter, setActiveFilter }) => {
+  // Filtrage des projets selon la catégorie active
+  const filteredProjects = activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter);
   
   return (
     <section id="projets" className="py-20 bg-transparent fade-in">
@@ -478,7 +420,7 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       
       {/* Boutons de filtrage des projets */}
       <div className="flex justify-center space-x-4 mb-12">
-        {FILTER_OPTIONS.map((filter) => (
+        {["all", "web"].map((filter) => (
           <button 
             key={filter} 
             onClick={() => setActiveFilter(filter)}
@@ -487,8 +429,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                 ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white scale-110 shadow-lg' 
                 : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:scale-105'
             }`}
-            aria-label={`Filtrer les projets par ${filter === 'all' ? 'tous' : filter}`}
-            aria-pressed={activeFilter === filter}
           >
             {filter === 'all' ? "Tous" : "Web"}
           </button>
@@ -499,14 +439,14 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {filteredProjects.map((project) => {
-            const projectLink = project.link ? `${PROJECT_BASE_URL}${project.link}` : project.github;
+            const projectLink = project.link || project.github;
             return (
               <div 
                 key={project.id} 
                 className="relative group"
               >
                 <div className={`bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-2 border-purple-400 rounded-2xl overflow-hidden shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl h-full flex flex-col ${projectLink ? 'cursor-pointer' : ''}`}
-                     onClick={() => projectLink && window.open(projectLink, '_blank', 'noopener,noreferrer')}>
+                     onClick={() => projectLink && window.open(projectLink, '_blank')}>
                   {/* Badge NEW sur les projets récents */}
                   {project.new === true && (
                     <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
@@ -519,8 +459,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                       src={project.image} 
                       alt={project.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
@@ -551,19 +489,17 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                           rel="noopener noreferrer" 
                           className="flex-1 text-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm border border-gray-600" 
                           onClick={(e) => e.stopPropagation()}
-                          aria-label={`Voir le code source de ${project.title} sur GitHub (ouvre dans un nouvel onglet)`}
                         >
                           GitHub
                         </a>
                       )}
                       {project.link && (
                         <a 
-                          href={`${PROJECT_BASE_URL}${project.link}`}
+                          href={project.link} 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm" 
                           onClick={(e) => e.stopPropagation()}
-                          aria-label={`Voir la démo en ligne de ${project.title} (ouvre dans un nouvel onglet)`}
                         >
                           Live
                         </a>
@@ -578,11 +514,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       </div>
     </section>
   );
-};
-
-Projets.propTypes = {
-  activeFilter: PropTypes.string.isRequired,
-  setActiveFilter: PropTypes.func.isRequired
 };
 
 /**
@@ -641,7 +572,6 @@ const Contact = () => {
                 <a 
                   href="mailto:fonseca.ryan69100@gmail.com"
                   className="text-white font-mono text-lg font-bold hover:text-blue-300 transition-colors block break-all"
-                  aria-label="M'envoyer un email"
                 >
                   fonseca.ryan69100@gmail.com
                 </a>
@@ -655,7 +585,6 @@ const Contact = () => {
                 <a 
                   href="tel:+33745352307"
                   className="text-white font-mono text-lg font-bold hover:text-purple-300 transition-colors block"
-                  aria-label="M'appeler au téléphone"
                 >
                   07 45 35 23 07
                 </a>
@@ -679,7 +608,7 @@ const Contact = () => {
                 </div>
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-2">
-                    {["React", "Laravel", "PHP", "JavaScript", "MySQL"].map((tech) => (
+                    {["React", "Laravel", "PHP", "JavaScript", "MySQL"].map((tech, index) => (
                       <span 
                         key={tech}
                         className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 px-3 py-2 rounded-lg text-sm font-mono font-bold hover:scale-110 transition-transform duration-200"
@@ -705,7 +634,6 @@ const Contact = () => {
             <a
               href="mailto:fonseca.ryan69100@gmail.com"
               className="relative bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white py-5 rounded-2xl transition-all font-mono font-bold uppercase tracking-wider text-xl text-center shadow-2xl hover:shadow-3xl hover:scale-105 block border-2 border-white/20"
-              aria-label="M'envoyer un email pour me contacter"
             >
               <span className="flex items-center justify-center gap-3">
                 {contactData.cta}
@@ -736,29 +664,17 @@ const Footer = () => (
       
       {/* Liens sociaux */}
       <div className="flex justify-center space-x-6 mb-8">
-        <a 
-          href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="bg-blue-600 p-3 rounded-full transition-transform hover:scale-125 hover:bg-blue-700"
-          aria-label="Voir mon profil LinkedIn (ouvre dans un nouvel onglet)"
-        >
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="" role="presentation" className="w-6 h-6" loading="lazy" />
+        <a href="https://www.linkedin.com/in/ryan-fonseca-3a73b2302/" target="_blank" rel="noopener noreferrer" className="bg-blue-600 p-3 rounded-full transition-transform hover:scale-125 hover:bg-blue-700">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-6 h-6" />
         </a>
-        <a 
-          href="https://github.com/rf69100" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="bg-gray-800 p-3 rounded-full transition-transform hover:scale-125 hover:bg-gray-700"
-          aria-label="Voir mon profil GitHub (ouvre dans un nouvel onglet)"
-        >
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" role="presentation" className="w-6 h-6 filter invert" loading="lazy" />
+        <a href="https://github.com/rf69100" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-3 rounded-full transition-transform hover:scale-125 hover:bg-gray-700">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6 filter invert" />
         </a>
       </div>
       
       {/* Copyright */}
       <div className="border-t border-gray-700 pt-6">
-        <p className="text-gray-500 font-mono text-sm">© 2025 MonPortfolio</p>
+        <p className="text-gray-500 font-mono text-sm">© 2025 MonPortfolio </p>
       </div>
     </div>
   </footer>
@@ -773,17 +689,109 @@ const Portfolio = () => {
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
 
-  // Effet pour simuler le chargement et activer smooth scroll
+  // Données des projets
+  const projets = [
+    {
+      id: 1,
+      title: "NBA Dashboard",
+      category: "web",
+      description: "Dashboard interactif en React avec statistiques de joueurs NBA et classements des équipes.",
+      github: "https://github.com/rf69100/nba-dashbord",
+      link: "/nba_dashboard/",
+      techs: ["React", "API", "Stats"],
+      image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80",
+      new: false
+    },
+
+    {
+      id: 2,
+      title: "Spotify Album finder",
+      category: "web",
+      description: "Application web pour explorer la discographie complète des artistes via l'API Spotify avec interface moderne et responsive.",
+      github: "https://github.com/rf69100/album_finder_spotify",
+      link: "/spotify-finder/",
+      techs: ["React", "Spotify API", "Bootstrap", "CSS3"],
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      features: [
+        "Recherche d'artistes en temps réel",
+        "Affichage de la discographie complète",
+        "Design responsive optimisé mobile",
+        "Intégration directe avec Spotify",
+        "Interface utilisateur moderne"
+      ],
+      new: false
+    },
+
+    {
+      id: 3,
+      title: "F1 Strategy Simulator 2026",
+      category: "web",
+      description: "Simulation complète de stratégie F1 avec données 2026, calculs physiques avancés et interface de course réaliste.",
+      github: "https://github.com/rf69100/f1-strategy-simulator",
+      link: "/f1-strategy-simulator/",
+      techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
+      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
+      features: [
+        "Données F1 2026 réalistes (20 pilotes, 10 équipes)",
+        "Physique de course avancée avec calculs réalistes",
+        "Système de stratégie optimisée avec IA",
+        "Télémétrie en temps réel avec alertes intelligentes",
+        "Gestion Safety Car et conditions météo dynamiques",
+        "Interface immersive style F1 officiel",
+        "18 circuits avec caractéristiques uniques",
+        "Système de pneus et carburant réaliste"
+      ],
+      new: false
+    },
+
+    {
+      id: 4,
+      title: "Café Pâtisserie",
+      category: "web",
+      description: "Site vitrine moderne pour une pâtisserie/café, réalisé avec React, Vite, Wouter, Tailwind et backend Express/Drizzle.",
+      github: "https://github.com/rf69100/CafePatisserieSite",
+      link: "/cafe-patisserie/",
+      techs: ["React", "Vite", "Wouter", "Tailwind", "Express", "Drizzle"],
+      image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80",
+      features: [
+        "Routing SPA optimisé sous-dossier Apache",
+        "Pages légales et privacy intégrées",
+        "Design responsive et moderne",
+        "Catalogue produits dynamique",
+        "Déploiement automatisé sur VPS OVH",
+        "Backend Express + MariaDB (Drizzle ORM)"
+      ],
+      new: false
+    },
+    {
+      id: 5,
+      title: "FitZoneShop",
+      category: "web",
+      description: "Plateforme e-commerce complète pour produits de fitness avec administration avancée, gestion des commandes et authentification 2FA.",
+      github: "https://github.com/rf69100/FitZoneShopFinal",
+      link: "/FitZoneShop/",
+      techs: ["Laravel 12", "React 19", "TypeScript", "Inertia.js", "Tailwind CSS 4", "MariaDB", "Pest PHP"],
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+      features: [
+        "E-commerce complet avec panier et wishlist",
+        "Authentification sécurisée avec 2FA (Laravel Fortify)",
+        "Dashboard administrateur avec statistiques en temps réel",
+        "Gestion complète produits, commandes et clients",
+        "Merge automatique panier invité vers utilisateur connecté",
+        "Interface moderne avec Radix UI et Lucide icons",
+        "42 tests automatisés avec Pest PHP (73% couverture)",
+        "Architecture monolithique moderne avec Inertia.js",
+        "Système de rôles (Customer/Admin) et protection des routes",
+        "Design responsive avec dark mode ready"
+      ],
+      new: true
+    }
+  ];
+
+  // Effet pour simuler le chargement
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 700);
-    
-    // Activation du smooth scroll natif
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    return () => {
-      clearTimeout(timer);
-      document.documentElement.style.scrollBehavior = '';
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Affichage du loader pendant le chargement
@@ -796,7 +804,7 @@ const Portfolio = () => {
       <Accueil />
       <Competences />
       <Parcours />
-      <Projets activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+      <Projets projects={projets} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       <Contact />
       <Footer />
     </div>
