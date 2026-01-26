@@ -8,15 +8,15 @@ import { hero, parcours as parcoursData, contact as contactData, projects } from
 
 const NAVIGATION_ITEMS = [
   { href: '#accueil', label: 'Accueil' },
-  { href: '#projets', label: 'Projets' },
   { href: '#competences', label: 'Compétences' },
+  { href: '#projets', label: 'Projets' },
   { href: '#contact', label: 'Contact' }
 ];
 
 const NAVIGATION_ITEMS_MOBILE = [
   { href: '#accueil', label: 'Accueil'},
+  { href: '#competences', label: 'Skills' },
   { href: '#projets', label: 'Projets' },
-  { href: '#competences', label: 'Skills' }
 ];
 
 const FILTER_OPTIONS = ["all", "web"];
