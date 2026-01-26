@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import {
   personalInfo,
   navigation,
@@ -46,13 +45,6 @@ const TechIcon = ({ tech }) => {
   );
 };
 
-TechIcon.propTypes = {
-  tech: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired
-  }).isRequired
-};
-
 /**
  * SocialIcon - Icône de réseau social réutilisable
  */
@@ -61,11 +53,6 @@ const SocialIcon = ({ platform, size = "w-5 h-5" }) => (
     <path d={socialIcons[platform].path}/>
   </svg>
 );
-
-SocialIcon.propTypes = {
-  platform: PropTypes.string.isRequired,
-  size: PropTypes.string
-};
 
 /**
  * SocialLink - Lien vers réseau social
@@ -86,13 +73,6 @@ const SocialLink = ({ platform, href, size = "w-10 h-10", iconSize = "w-5 h-5" }
       <SocialIcon platform={platform} size={iconSize} />
     </a>
   );
-};
-
-SocialLink.propTypes = {
-  platform: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  size: PropTypes.string,
-  iconSize: PropTypes.string
 };
 
 /**
@@ -335,7 +315,7 @@ const Parcours = () => {
         {/* Grille des étapes du parcours */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {parcours.map((step, index) => {
-            const colorKey = step.color || 'blue'; // Default to blue if no color specified
+            const colorKey = step.color || 'blue';
             return (
               <div key={step.number} className="relative group">
                 <div className={`${parcoursCardStyles[colorKey]} border-2 rounded-2xl p-6 h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg`}>
@@ -503,11 +483,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       </div>
     </section>
   );
-};
-
-Projets.propTypes = {
-  activeFilter: PropTypes.string.isRequired,
-  setActiveFilter: PropTypes.func.isRequired
 };
 
 /**
