@@ -22,9 +22,9 @@ export const hero = {
   intro: "Développeur web passionné par la création d'applications modernes et performantes. Expérience concrète en React, Laravel et gestion de projets fullstack.",
   techs: "React • Laravel",
   formation: "BTS SIO SLAM • 2024-2026",
-  context: "Stage validé chez APICIL (2026)",
+  context: "Stage en cours chez APICIL (2026)",
   searchStatus: "RECHERCHE ACTIVE : Alternance Rentrée 2026",
-  searchDetails: "Bachelor DevOps ou Fullstack"
+  searchDetails: "Bachelor Developpeur Fullstack"
 };
 
 /**
@@ -47,7 +47,7 @@ export const parcours = [
     date: "2024 - 2026",
     school: "Lycée Les Chassagnes",
     description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
-    progress: 75
+    progress: 80
   },
   {
     number: 3,
@@ -65,7 +65,7 @@ export const parcours = [
     date: "Janvier - Février 2026",
     school: "APICIL",
     description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
-    progress: 0
+    progress: 60
   },
   {
     number: 5,
@@ -83,7 +83,7 @@ export const parcours = [
  */
 export const contact = {
   mission: {
-    title: "Alternance Développeur Web/DevOps",
+    title: "Alternance Développeur Fullstack",
     dates: "Rentrée 2026 (rythme entreprise/école)"
   },
   availability: {
