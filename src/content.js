@@ -248,7 +248,7 @@ export const projects = [
     category: "web",
     description: "Simulation complète de stratégie F1 avec données 2026, calculs physiques avancés et interface de course réaliste.",
     github: "https://github.com/rf69100/f1-strategy-simulator",
-    link: "/f1-strategy-simulator/",
+    link: "/f1-simulator/",
     techs: ["React", "TypeScript", "Zustand", "F1 Data", "Physics Engine"],
     image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
     new: false
@@ -270,7 +270,7 @@ export const projects = [
     category: "web",
     description: "Plateforme e-commerce complète pour produits de fitness avec administration avancée, gestion des commandes et authentification 2FA.",
     github: "https://github.com/rf69100/FitZoneShopFinal",
-    link: "/FitZoneShop/",
+    link: "/coming-soon",
     techs: ["Laravel 12", "React 19", "TypeScript", "Inertia.js", "Tailwind CSS 4", "MariaDB", "Pest PHP"],
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
     new: true
