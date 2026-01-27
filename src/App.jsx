@@ -413,11 +413,7 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
 
             const handleCardClick = () => {
               if (!projectLink) return;
-              if (isComingSoon) {
-                window.location.href = projectLink;
-              } else {
-                window.open(projectLink, '_blank');
-              }
+              window.location.href = projectLink;
             };
 
             return (
@@ -476,8 +472,6 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                       {project.link && (
                         <a
                           href={projectLink}
-                          target={isComingSoon ? "_self" : "_blank"}
-                          rel={isComingSoon ? undefined : "noopener noreferrer"}
                           className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
