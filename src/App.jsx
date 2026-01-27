@@ -19,7 +19,7 @@ import {
   parcoursBadgeStyles
 } from './content';
 
-const PROJECT_BASE_URL = 'https://ryanfonseca.fr/';
+const PROJECT_BASE_URL = 'https://ryanfonseca.fr';
 
 // ============================================================================
 // COMPOSANTS UTILITAIRES
