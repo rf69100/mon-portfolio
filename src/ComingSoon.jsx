@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { personalInfo, socialIcons } from './content';
+import { personalInfo, socialIcons, comingSoon } from './content';
 
 /**
  * SocialIcon - Icône de réseau social
@@ -13,241 +13,187 @@ const SocialIcon = ({ platform, size = "w-5 h-5" }) => (
 /**
  * SocialLink - Lien vers réseau social
  */
-const SocialLink = ({ platform, href, size = "w-10 h-10", iconSize = "w-5 h-5" }) => {
+const SocialLink = ({ platform, href }) => {
   const bgClass = platform === 'linkedin'
     ? 'bg-blue-600 p-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 hover:scale-110'
     : 'bg-gray-800 p-2 rounded-lg transition-all duration-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-gray-500/50 hover:scale-110 border border-gray-700';
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={bgClass}
-      aria-label={platform}
-    >
-      <SocialIcon platform={platform} size={iconSize} />
+    <a href={href} target="_blank" rel="noopener noreferrer" className={bgClass} aria-label={platform}>
+      <SocialIcon platform={platform} size="w-6 h-6" />
     </a>
   );
 };
 
 /**
- * Messages drôles qui changent aléatoirement
+ * StatCard - Carte de statistique
  */
-const funnyMessages = [
-  "Le dev est parti chercher des croissants...",
-  "En train de debugger 47 erreurs... enfin 48... 49...",
-  "Ctrl+S en boucle pour être sûr",
-  "Le code compile... enfin presque",
-  "Stack Overflow est en maintenance (panique)",
-  "npm install patience --save",
-  "Le stagiaire est sur le coup !",
-  "Chargement des pixels... 1 sur 8 millions",
-  "En attente de motivation.exe",
-  "git push --force (oups)",
-  "Le café n'était pas assez fort aujourd'hui",
-  "En train de négocier avec le CSS",
-  "undefined is not a function (classique)",
-  "Le serveur fait sa sieste",
-  "En mode avion... mais sans avion",
-  "Segmentation fault (core dumped)",
-  "It works on my machine",
-  "Have you tried turning it off and on again?",
-  "404 Motivation Not Found"
-];
+const StatCard = ({ stat }) => {
+  const colorStyles = {
+    purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400' },
+    green: { border: 'hover:border-green-500/50', text: 'text-green-400' },
+    blue: { border: 'hover:border-blue-500/50', text: 'text-blue-400' },
+    red: { border: 'hover:border-red-500/50', text: 'text-red-400' }
+  };
+
+  const style = colorStyles[stat.color] || colorStyles.blue;
+
+  return (
+    <div className={`bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-xl p-4 border-2 border-gray-700/50 ${style.border} transition-all duration-300 hover:scale-105`}>
+      <div className="text-gray-400 font-mono text-xs uppercase mb-2">{stat.label}</div>
+      <div className={`font-mono font-bold text-2xl ${stat.color === 'red' ? style.text : 'text-white'}`}>
+        {stat.value}
+      </div>
+    </div>
+  );
+};
 
 /**
  * COMING SOON PAGE
  */
 const ComingSoon = () => {
-  const [message, setMessage] = useState(funnyMessages[0]);
+  const [message, setMessage] = useState(comingSoon.statusMessages[0]);
   const [dots, setDots] = useState('');
-  const [glitchText, setGlitchText] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Changer le message drôle toutes les 4 secondes
+  // Changer le message toutes les 4 secondes
   useEffect(() => {
-    const messageInterval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * funnyMessages.length);
-      setGlitchText(true);
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
       setTimeout(() => {
-        setMessage(funnyMessages[randomIndex]);
-        setGlitchText(false);
+        const randomIndex = Math.floor(Math.random() * comingSoon.statusMessages.length);
+        setMessage(comingSoon.statusMessages[randomIndex]);
+        setIsTransitioning(false);
       }, 150);
     }, 4000);
-
-    return () => clearInterval(messageInterval);
+    return () => clearInterval(interval);
   }, []);
 
-  // Animation des points de suspension
+  // Animation des points
   useEffect(() => {
-    const dotsInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setDots(prev => prev.length >= 3 ? '' : prev + '.');
     }, 500);
-
-    return () => clearInterval(dotsInterval);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col">
-      {/* Header simplifié */}
-      <header className="bg-gray-900/95 backdrop-blur-md shadow-2xl border-b-2 border-orange-500/50 py-4">
+      {/* Header */}
+      <header className="bg-gray-900/95 backdrop-blur-md shadow-2xl border-b-2 border-blue-500/50 py-4">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between">
             <a href="/" className="group flex items-center">
-              <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-red-500 font-mono tracking-widest flex items-center">
-                <span className="mr-2 text-orange-400">[</span>
-                <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">WORK_IN_PROGRESS</span>
-                <span className="sm:hidden">WIP</span>
-                <span className="ml-2 text-orange-400">]</span>
+              <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 font-mono tracking-widest">
+                <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">{comingSoon.header.title}</span>
+                <span className="sm:hidden">{comingSoon.header.titleShort}</span>
               </div>
             </a>
-
             <a
               href="/"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg transition-all font-mono font-bold text-sm hover:scale-105"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg transition-all font-mono font-bold text-sm hover:scale-105 shadow-lg shadow-blue-500/30"
             >
-              {'<'} Retour au Portfolio
+              {comingSoon.header.backButton}
             </a>
           </div>
         </div>
       </header>
 
-      {/* Contenu principal */}
+      {/* Main */}
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="text-center max-w-3xl mx-auto">
 
-          {/* ASCII Art style icon */}
-          <div className="mb-8 font-mono text-orange-400 text-sm md:text-base leading-tight">
-            <pre className="inline-block text-left">
-{`
-    ╔══════════════════╗
-    ║  DEPLOYING...    ║
-    ║  ██████████░░ 90%║
-    ║  [CTRL+C] abort  ║
-    ╚══════════════════╝
-`}
-            </pre>
-          </div>
-
-          {/* Titre principal */}
-          <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-red-500 mb-6 font-mono tracking-tight">
-            {'>'} PAS ENCORE DEPLOYE_
+          {/* Titre */}
+          <h1 className={`text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${comingSoon.hero.gradient} mb-4 font-mono tracking-tight`}>
+            {comingSoon.hero.title}
           </h1>
-
-          {/* Sous-titre */}
-          <h2 className={`text-xl md:text-2xl font-bold text-yellow-300 mb-8 font-mono uppercase tracking-wider transition-all duration-150 ${glitchText ? 'opacity-0 translate-x-2' : 'opacity-100'}`}>
-            // Mais ça risque de pas tarder !
+          <h2 className="text-xl md:text-2xl font-bold text-gray-400 mb-10 font-mono uppercase tracking-wider">
+            {comingSoon.hero.subtitle}
           </h2>
 
-          {/* Carte avec message drôle */}
-          <div className="bg-gradient-to-br from-gray-900/80 to-orange-900/30 border-2 border-orange-500/50 rounded-2xl p-8 mb-8 backdrop-blur-sm shadow-2xl shadow-orange-500/20">
+          {/* Terminal Card */}
+          <div className="bg-gradient-to-br from-gray-900/80 to-purple-900/20 border-2 border-purple-500/50 rounded-2xl p-6 md:p-8 mb-8 backdrop-blur-sm shadow-2xl shadow-purple-500/20">
 
-            {/* Terminal style header */}
-            <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-700">
+            {/* Terminal Header */}
+            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-700">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              <span className="ml-4 text-gray-500 font-mono text-sm">deployment.sh</span>
+              <span className="ml-4 text-gray-500 font-mono text-sm">{comingSoon.terminal.filename}</span>
             </div>
 
-            {/* Barre de progression fake */}
+            {/* Progress Bar */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-orange-300 font-mono font-bold text-sm uppercase">$ deploying{dots}</span>
-                <span className="text-orange-300 font-mono font-bold text-sm">99.9%</span>
+                <span className="text-purple-300 font-mono font-bold text-sm uppercase">
+                  $ {comingSoon.terminal.command}{dots}
+                </span>
+                <span className="text-purple-300 font-mono font-bold text-sm">
+                  {comingSoon.terminal.progress}%
+                </span>
               </div>
-              <div className="bg-gray-800 rounded-full h-4 overflow-hidden border border-orange-500/30">
+              <div className="bg-gray-800 rounded-full h-3 overflow-hidden border border-purple-500/30">
                 <div
-                  className="h-full bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 rounded-full"
-                  style={{ width: '99.9%', backgroundSize: '200% 100%', animation: 'shimmer 2s infinite' }}
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full animate-pulse"
+                  style={{ width: `${comingSoon.terminal.progress}%` }}
                 ></div>
               </div>
-              <p className="text-gray-500 font-mono text-xs mt-2 italic">* Estimation très optimiste</p>
+              <p className="text-gray-600 font-mono text-xs mt-2 italic">{comingSoon.terminal.note}</p>
             </div>
 
-            {/* Message drôle qui change */}
+            {/* Status Message */}
             <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-green-400 font-mono text-sm">ryan@portfolio:~$</span>
                 <span className="text-gray-400 font-mono text-sm">status</span>
               </div>
-              <p className={`text-gray-300 font-mono text-lg transition-all duration-150 ${glitchText ? 'opacity-0 -translate-y-2' : 'opacity-100'}`}>
-                {`> ${message}`}
+              <p className={`text-gray-300 font-mono text-base md:text-lg transition-all duration-150 ${isTransitioning ? 'opacity-0 -translate-y-2' : 'opacity-100'}`}>
+                &gt; {message}
               </p>
             </div>
           </div>
 
-          {/* Infos de debug humoristiques */}
+          {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-orange-500/50 transition-colors">
-              <div className="text-2xl mb-2 text-orange-400 font-mono font-bold">{"{ }"}</div>
-              <div className="text-gray-400 font-mono text-xs uppercase">Cafés bus</div>
-              <div className="text-white font-mono font-bold text-xl">Infinity</div>
-            </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-green-500/50 transition-colors">
-              <div className="text-2xl mb-2 text-green-400 font-mono font-bold">[OK]</div>
-              <div className="text-gray-400 font-mono text-xs uppercase">Bugs fixés</div>
-              <div className="text-white font-mono font-bold text-xl">42</div>
-            </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-blue-500/50 transition-colors">
-              <div className="text-2xl mb-2 text-blue-400 font-mono font-bold">npm</div>
-              <div className="text-gray-400 font-mono text-xs uppercase">npm install</div>
-              <div className="text-white font-mono font-bold text-xl">127</div>
-            </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-red-500/50 transition-colors">
-              <div className="text-2xl mb-2 text-red-400 font-mono font-bold">[!]</div>
-              <div className="text-gray-400 font-mono text-xs uppercase">Santé mentale</div>
-              <div className="text-red-400 font-mono font-bold text-xl">12%</div>
-            </div>
+            {comingSoon.stats.map((stat, index) => (
+              <StatCard key={index} stat={stat} />
+            ))}
           </div>
 
-          {/* Boutons d'action */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <a
-              href="/"
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl transition-all font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-blue-500/50 hover:scale-105 border-2 border-blue-400/50"
+              href={comingSoon.cta.primary.href}
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl transition-all font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-purple-500/50 hover:scale-105 border-2 border-purple-400/50"
             >
-              {'<<'} Voir les projets déployés
+              {comingSoon.cta.primary.text}
             </a>
             <a
-              href={personalInfo.github}
+              href={comingSoon.cta.secondary.href}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-xl transition-all font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-gray-500/50 hover:scale-105 border-2 border-gray-600"
             >
-              Voir le code sur GitHub {'>>'}
+              {comingSoon.cta.secondary.text}
             </a>
           </div>
 
-          {/* Message de fin */}
-          <p className="text-gray-500 font-mono text-sm">
-            {'// En attendant, check mes autres projets ou stalk-moi sur les réseaux'}
-          </p>
-
-          {/* Liens sociaux */}
-          <div className="flex justify-center space-x-4 mt-6">
-            <SocialLink platform="linkedin" href={personalInfo.linkedin} size="w-12 h-12" iconSize="w-6 h-6" />
-            <SocialLink platform="github" href={personalInfo.github} size="w-12 h-12" iconSize="w-6 h-6" />
+          {/* Social Links */}
+          <div className="flex justify-center space-x-4">
+            <SocialLink platform="linkedin" href={personalInfo.linkedin} />
+            <SocialLink platform="github" href={personalInfo.github} />
           </div>
         </div>
       </main>
 
-      {/* Footer simplifié */}
-      <footer className="bg-gray-900 text-white py-6 border-t-2 border-orange-500/30">
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-6 border-t-2 border-blue-500/30">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-500 font-mono text-sm">
-            {'/*'} {new Date().getFullYear()} {personalInfo.name} - Ce projet arrive bientôt... promis ! {'*/'}
+            {new Date().getFullYear()} {personalInfo.name} - {comingSoon.footer.text}
           </p>
         </div>
       </footer>
-
-      {/* CSS pour l'animation shimmer */}
-      <style>{`
-        @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-      `}</style>
     </div>
   );
 };

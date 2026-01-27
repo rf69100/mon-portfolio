@@ -425,3 +425,64 @@ export const parcoursBadgeStyles = {
   purple: 'bg-purple-500/20 text-purple-300 border-purple-400',
   green: 'bg-green-500/20 text-green-300 border-green-400'
 };
+
+/**
+ * Page Coming Soon
+ */
+export const comingSoon = {
+  header: {
+    title: "WORK IN PROGRESS",
+    titleShort: "WIP",
+    backButton: "Retour au Portfolio"
+  },
+  hero: {
+    title: "PROJET EN CONSTRUCTION",
+    subtitle: "Ca arrive bientot, promis !",
+    gradient: "from-purple-400 via-blue-500 to-cyan-500"
+  },
+  terminal: {
+    filename: "deployment.sh",
+    command: "deploying",
+    progress: 99.9,
+    note: "* Estimation tres optimiste (on y croit tous !)"
+  },
+  statusMessages: [
+    "Le dev est parti chercher des croissants...",
+    "En train de debugger 47 erreurs... enfin 48... 49...",
+    "Ctrl+S en boucle pour etre sur",
+    "Le code compile... enfin presque",
+    "Stack Overflow est en maintenance",
+    "Claude est en maintenace... Chatgpt aussi d'ailleurs...",
+    "npm install patience --save",
+    "Le stagiaire est sur le coup ! (à mais c'est moi le stagiaire c'est vrai...",
+    "Chargement des pixels... 1 sur 8 millions",
+    "En attente de motivation.exe",
+    "git push --force (oups)",
+    "Le cafe n'etait pas assez fort aujourd'hui (et bon)",
+    "En train de negocier avec le CSS",
+    "undefined is not a function",
+    "Le serveur fait sa sieste",
+    "Segmentation fault (core dumped)",
+    "It works on my machine (c'est vrai je mens pas !)",
+    "404 Motivation Not Found"
+  ],
+  stats: [
+    { label: "Cafes bus", value: "Infinity", color: "purple" },
+    { label: "Bugs fixes", value: "42", color: "green" },
+    { label: "npm install", value: "127", color: "blue" },
+    { label: "Sante mentale", value: "12%", color: "red" }
+  ],
+  cta: {
+    primary: {
+      text: "Voir les projets deployes",
+      href: "/"
+    },
+    secondary: {
+      text: "Voir le code sur GitHub",
+      href: personalInfo.github
+    }
+  },
+  footer: {
+    text: "Ce projet arrive bientot... promis !"
+  }
+};
