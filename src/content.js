@@ -454,7 +454,6 @@ export const comingSoon = {
     "Stack Overflow est en maintenance",
     "Claude est en maintenace... Chatgpt aussi d'ailleurs...",
     "npm install patience --save",
-    "Le stagiaire est sur le coup ! (à mais c'est moi le stagiaire c'est vrai...",
     "Chargement des pixels... 1 sur 8 millions",
     "En attente de motivation.exe",
     "git push --force (oups)",
