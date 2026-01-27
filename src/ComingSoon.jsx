@@ -49,7 +49,11 @@ const funnyMessages = [
   "En train de négocier avec le CSS",
   "undefined is not a function (classique)",
   "Le serveur fait sa sieste",
-  "En mode avion... mais sans avion"
+  "En mode avion... mais sans avion",
+  "Segmentation fault (core dumped)",
+  "It works on my machine",
+  "Have you tried turning it off and on again?",
+  "404 Motivation Not Found"
 ];
 
 /**
@@ -91,9 +95,10 @@ const ComingSoon = () => {
           <div className="flex items-center justify-between">
             <a href="/" className="group flex items-center">
               <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-red-500 font-mono tracking-widest flex items-center">
-                <span className="mr-2 transform group-hover:rotate-12 transition-transform duration-300">🚧</span>
-                <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">Zone de Travaux</span>
+                <span className="mr-2 text-orange-400">[</span>
+                <span className="hidden sm:inline group-hover:tracking-wider transition-all duration-300">WORK_IN_PROGRESS</span>
                 <span className="sm:hidden">WIP</span>
+                <span className="ml-2 text-orange-400">]</span>
               </div>
             </a>
 
@@ -101,7 +106,7 @@ const ComingSoon = () => {
               href="/"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg transition-all font-mono font-bold text-sm hover:scale-105"
             >
-              Retour au Portfolio
+              {'<'} Retour au Portfolio
             </a>
           </div>
         </div>
@@ -111,41 +116,49 @@ const ComingSoon = () => {
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="text-center max-w-3xl mx-auto">
 
-          {/* Icône animée */}
-          <div className="mb-8 relative">
-            <div className="text-9xl animate-bounce">
-              🏗️
-            </div>
-            <div className="absolute -top-4 -right-4 text-4xl animate-spin" style={{ animationDuration: '3s' }}>
-              ⚙️
-            </div>
-            <div className="absolute -bottom-2 -left-4 text-3xl animate-pulse">
-              💻
-            </div>
+          {/* ASCII Art style icon */}
+          <div className="mb-8 font-mono text-orange-400 text-sm md:text-base leading-tight">
+            <pre className="inline-block text-left">
+{`
+    ╔══════════════════╗
+    ║  DEPLOYING...    ║
+    ║  ██████████░░ 90%║
+    ║  [CTRL+C] abort  ║
+    ╚══════════════════╝
+`}
+            </pre>
           </div>
 
           {/* Titre principal */}
           <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-red-500 mb-6 font-mono tracking-tight">
-            PAS ENCORE DÉPLOYÉ
+            {'>'} PAS ENCORE DEPLOYE_
           </h1>
 
-          {/* Sous-titre avec effet glitch */}
+          {/* Sous-titre */}
           <h2 className={`text-xl md:text-2xl font-bold text-yellow-300 mb-8 font-mono uppercase tracking-wider transition-all duration-150 ${glitchText ? 'opacity-0 translate-x-2' : 'opacity-100'}`}>
-            Mais ça risque de pas tarder !
+            // Mais ça risque de pas tarder !
           </h2>
 
           {/* Carte avec message drôle */}
           <div className="bg-gradient-to-br from-gray-900/80 to-orange-900/30 border-2 border-orange-500/50 rounded-2xl p-8 mb-8 backdrop-blur-sm shadow-2xl shadow-orange-500/20">
 
+            {/* Terminal style header */}
+            <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-700">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <span className="ml-4 text-gray-500 font-mono text-sm">deployment.sh</span>
+            </div>
+
             {/* Barre de progression fake */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-orange-300 font-mono font-bold text-sm uppercase">Déploiement en cours{dots}</span>
+                <span className="text-orange-300 font-mono font-bold text-sm uppercase">$ deploying{dots}</span>
                 <span className="text-orange-300 font-mono font-bold text-sm">99.9%</span>
               </div>
               <div className="bg-gray-800 rounded-full h-4 overflow-hidden border border-orange-500/30">
                 <div
-                  className="h-full bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 rounded-full transition-all duration-1000 animate-pulse"
+                  className="h-full bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500 rounded-full"
                   style={{ width: '99.9%', backgroundSize: '200% 100%', animation: 'shimmer 2s infinite' }}
                 ></div>
               </div>
@@ -154,34 +167,35 @@ const ComingSoon = () => {
 
             {/* Message drôle qui change */}
             <div className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-green-400 font-mono text-sm">{'>'} status:</span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-green-400 font-mono text-sm">ryan@portfolio:~$</span>
+                <span className="text-gray-400 font-mono text-sm">status</span>
               </div>
               <p className={`text-gray-300 font-mono text-lg transition-all duration-150 ${glitchText ? 'opacity-0 -translate-y-2' : 'opacity-100'}`}>
-                {message}
+                {`> ${message}`}
               </p>
             </div>
           </div>
 
           {/* Infos de debug humoristiques */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <div className="text-2xl mb-2">☕</div>
+            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-orange-500/50 transition-colors">
+              <div className="text-2xl mb-2 text-orange-400 font-mono font-bold">{"{ }"}</div>
               <div className="text-gray-400 font-mono text-xs uppercase">Cafés bus</div>
-              <div className="text-white font-mono font-bold text-xl">∞</div>
+              <div className="text-white font-mono font-bold text-xl">Infinity</div>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <div className="text-2xl mb-2">🐛</div>
+            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-green-500/50 transition-colors">
+              <div className="text-2xl mb-2 text-green-400 font-mono font-bold">[OK]</div>
               <div className="text-gray-400 font-mono text-xs uppercase">Bugs fixés</div>
               <div className="text-white font-mono font-bold text-xl">42</div>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <div className="text-2xl mb-2">🔄</div>
+            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-blue-500/50 transition-colors">
+              <div className="text-2xl mb-2 text-blue-400 font-mono font-bold">npm</div>
               <div className="text-gray-400 font-mono text-xs uppercase">npm install</div>
               <div className="text-white font-mono font-bold text-xl">127</div>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-              <div className="text-2xl mb-2">😅</div>
+            <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-red-500/50 transition-colors">
+              <div className="text-2xl mb-2 text-red-400 font-mono font-bold">[!]</div>
               <div className="text-gray-400 font-mono text-xs uppercase">Santé mentale</div>
               <div className="text-red-400 font-mono font-bold text-xl">12%</div>
             </div>
@@ -193,7 +207,7 @@ const ComingSoon = () => {
               href="/"
               className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl transition-all font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-blue-500/50 hover:scale-105 border-2 border-blue-400/50"
             >
-              Voir les projets déployés
+              {'<<'} Voir les projets déployés
             </a>
             <a
               href={personalInfo.github}
@@ -201,13 +215,13 @@ const ComingSoon = () => {
               rel="noopener noreferrer"
               className="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-xl transition-all font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-gray-500/50 hover:scale-105 border-2 border-gray-600"
             >
-              Voir le code sur GitHub
+              Voir le code sur GitHub {'>>'}
             </a>
           </div>
 
           {/* Message de fin */}
           <p className="text-gray-500 font-mono text-sm">
-            En attendant, tu peux toujours checker mes autres projets ou me stalker sur les réseaux
+            {'// En attendant, check mes autres projets ou stalk-moi sur les réseaux'}
           </p>
 
           {/* Liens sociaux */}
@@ -222,7 +236,7 @@ const ComingSoon = () => {
       <footer className="bg-gray-900 text-white py-6 border-t-2 border-orange-500/30">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-500 font-mono text-sm">
-            © 2025 {personalInfo.name} • Ce projet arrive bientôt... promis !
+            {'/*'} {new Date().getFullYear()} {personalInfo.name} - Ce projet arrive bientôt... promis ! {'*/'}
           </p>
         </div>
       </footer>
