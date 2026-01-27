@@ -408,14 +408,25 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {filteredProjects.map((project, index) => {
-            const projectLink = project.link ? `${PROJECT_BASE_URL}${project.link}` : null;
+            const isComingSoon = project.link === '/coming-soon';
+            const projectLink = project.link ? (isComingSoon ? project.link : `${PROJECT_BASE_URL}${project.link}`) : null;
+
+            const handleCardClick = () => {
+              if (!projectLink) return;
+              if (isComingSoon) {
+                window.location.href = projectLink;
+              } else {
+                window.open(projectLink, '_blank');
+              }
+            };
+
             return (
-              <div 
-                key={project.id} 
+              <div
+                key={project.id}
                 className="relative group"
               >
                 <div className={`bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-2 border-purple-400 rounded-2xl overflow-hidden shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 h-full flex flex-col ${projectLink ? 'cursor-pointer' : ''}`}
-                     onClick={() => projectLink && window.open(projectLink, '_blank')}>
+                     onClick={handleCardClick}>
                   {/* Badge NEW sur les projets récents */}
                   {project.new === true && (
                     <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
@@ -463,14 +474,14 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                         </a>
                       )}
                       {project.link && (
-                        <a 
-                          href={`${PROJECT_BASE_URL}${project.link}`}
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm" 
+                        <a
+                          href={projectLink}
+                          target={isComingSoon ? "_self" : "_blank"}
+                          rel={isComingSoon ? undefined : "noopener noreferrer"}
+                          className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Live
+                          {isComingSoon ? "Bientot" : "Live"}
                         </a>
                       )}
                     </div>
