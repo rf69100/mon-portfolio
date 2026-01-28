@@ -413,7 +413,8 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
 
             const handleCardClick = () => {
               if (!projectLink) return;
-              window.location.href = projectLink;
+              const newWin = window.open(projectLink, '_blank', 'noopener,noreferrer');
+              if (newWin) newWin.opener = null;
             };
 
             return (
@@ -472,6 +473,8 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
                       {project.link && (
                         <a
                           href={projectLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm"
                           onClick={(e) => e.stopPropagation()}
                         >
