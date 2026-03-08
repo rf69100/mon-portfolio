@@ -451,24 +451,19 @@ export const comingSoon = {
     "En train de debugger 47 erreurs... enfin 48... 49...",
     "Ctrl+S en boucle pour etre sur",
     "Le code compile... enfin presque",
-    "Stack Overflow est en maintenance",
     "Claude est en maintenace... Chatgpt aussi d'ailleurs...",
     "npm install patience --save",
-    "Chargement des pixels... 1 sur 8 millions",
-    "En attente de motivation.exe",
     "git push --force (oups)",
     "Le cafe n'etait pas assez fort aujourd'hui (et bon)",
     "En train de negocier avec le CSS",
     "undefined is not a function",
     "Le serveur fait sa sieste",
-    "Segmentation fault (core dumped)",
     "It works on my machine (c'est vrai je mens pas !)",
     "404 Motivation Not Found"
   ],
   stats: [
-    { label: "Cafes bus", value: "Infinity", color: "purple" },
-    { label: "Bugs fixes", value: "42", color: "green" },
-    { label: "npm install", value: "127", color: "blue" },
+    { label: "Cafés pris", value: "trop", color: "purple" },
+    { label: "Bugs fixés", value: "42", color: "green" },
     { label: "Sante mentale", value: "12%", color: "red" }
   ],
   cta: {
