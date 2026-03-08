@@ -56,17 +56,47 @@ const ComingSoon = () => {
   const [dots, setDots] = useState('');
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const shuffleMessages = (messages) => {
+    const shuffled = [...messages];
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   // Changer le message toutes les 4 secondes
   useEffect(() => {
+    if (!comingSoon.statusMessages.length) return undefined;
+
+    let shuffledCycle = shuffleMessages(comingSoon.statusMessages);
+    let currentIndex = 0;
+    let timeoutId;
+
+    setMessage(shuffledCycle[currentIndex]);
+
     const interval = setInterval(() => {
       setIsTransitioning(true);
-      setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * comingSoon.statusMessages.length);
-        setMessage(comingSoon.statusMessages[randomIndex]);
+      timeoutId = setTimeout(() => {
+        currentIndex += 1;
+
+        if (currentIndex >= shuffledCycle.length) {
+          const lastMessage = shuffledCycle[shuffledCycle.length - 1];
+          do {
+            shuffledCycle = shuffleMessages(comingSoon.statusMessages);
+          } while (comingSoon.statusMessages.length > 1 && shuffledCycle[0] === lastMessage);
+          currentIndex = 0;
+        }
+
+        setMessage(shuffledCycle[currentIndex]);
         setIsTransitioning(false);
       }, 150);
     }, 4000);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearInterval(interval);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   // Animation des points
