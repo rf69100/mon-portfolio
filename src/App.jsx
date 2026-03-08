@@ -5,7 +5,6 @@ import {
   hero,
   skills,
   parcours,
-  colorMap,
   projectsConfig,
   projects,
   contact,
@@ -239,10 +238,13 @@ const Accueil = () => (
         </p>
       </div>
       
-      {/* Bouton de téléchargement CV */}
-      <div className="flex justify-center mb-6">
+      {/* Boutons CTA */}
+      <div className="flex justify-center gap-4 mb-6">
         <a href={hero.cta.primary.href} download={hero.cta.primary.download} className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
           {hero.cta.primary.text}
+        </a>
+        <a href={hero.cta.secondary.href} className="w-64 text-center bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-blue-400 text-white py-4 rounded-lg hover:scale-110 transition-all font-mono font-bold shadow-lg shadow-blue-500/50">
+          {hero.cta.secondary.text}
         </a>
       </div>
 

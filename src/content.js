@@ -7,7 +7,7 @@
  */
 export const personalInfo = {
   name: "Ryan Fonseca",
-  title: "Développeur Web",
+  title: "Développeur FullStack",
   email: "fonseca.ryan69100@gmail.com",
   phone: "07 45 35 23 07",
   phoneFormatted: "07 45 35 23 07",
@@ -15,7 +15,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/ryan-fonseca-3a73b2302/",
   github: "https://github.com/rf69100",
   initials: "RF",
-  tagline: "Étudiant BTS SIO SLAM • Stage en cours chez APICIL  • Recherche alternance Bachelor Developpeur Fullstack 2026"
+  tagline: "Étudiant BTS SIO SLAM • Recherche alternance Bachelor Developpeur Fullstack 2026"
 };
 
 /**
@@ -40,7 +40,7 @@ export const hero = {
   intro: "Développeur web passionné par la création d'applications modernes et performantes. Expérience concrète en React, Laravel et gestion de projets fullstack.",
   techs: "React • Laravel",
   formation: "BTS SIO SLAM • 2024-2026",
-  context: "Stage en cours chez APICIL (2026)",
+  context: "En recherche dd'une alternance pour 2026",
   searchStatus: "RECHERCHE ACTIVE : Alternance Rentrée 2026",
   searchDetails: "Bachelor Developpeur Fullstack",
   cta: {
@@ -72,8 +72,10 @@ export const skills = [
       { name: "HTML5", icon: "html5" },
       { name: "CSS3", icon: "css3" },
       { name: "JavaScript", icon: "javascript" },
-      { name: "Tailwind CSS", icon: "tailwindcss" },
       { name: "TypeScript", icon: "typescript" },
+      { name: "Tailwind CSS", icon: "tailwindcss" },
+      { name : "Bootstrap", icon: "bootstrap" },
+      { name : "Angular", icon: "angular" },
     ]
   },
   {
@@ -117,6 +119,9 @@ export const skills = [
       { name: "Windows", icon: "windows" },
       { name: "VS Code", icon: "vscode" },
       { name: "Figma", icon: "figma" },
+      { name: "Postman", icon: "postman" },
+      { name: "Docker", icon: "docker"},
+      { name: "Jira", icon: "jira" },
     ]
   }
 ];

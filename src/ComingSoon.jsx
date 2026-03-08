@@ -154,7 +154,7 @@ const ComingSoon = () => {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
             {comingSoon.stats.map((stat, index) => (
               <StatCard key={index} stat={stat} />
             ))}
