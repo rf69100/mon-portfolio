@@ -159,7 +159,7 @@ export const parcours = [
     date: "Janvier - Février 2026",
     school: "APICIL",
     description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
-    progress: 60
+    progress: 100
   },
   {
     number: 5,
