@@ -7,7 +7,7 @@
  */
 export const personalInfo = {
   name: "Ryan Fonseca",
-  title: "Développeur FullStack",
+  title: "Développeur Fullstack",
   email: "fonseca.ryan69100@gmail.com",
   phone: "07 45 35 23 07",
   phoneFormatted: "07 45 35 23 07",
@@ -24,8 +24,11 @@ export const personalInfo = {
 export const navigation = [
   { href: '#accueil', label: 'Accueil' },
   { href: '#competences', label: 'Compétences' },
-  { href: '#experience', label: 'Parcours' },
-  { href: '#projets', label: 'Projets' },
+  { href: '#veille', label: 'Veille' },
+  { href: '#formation', label: 'Formation' },
+  { href: '#realisations', label: 'Réalisations' },
+  { href: '#stages', label: 'Stages' },
+  { href: '#projets', label: 'Projets personnels' },
   { href: '#contact', label: 'Contact' }
 ];
 
@@ -74,8 +77,8 @@ export const skills = [
       { name: "JavaScript", icon: "javascript" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Tailwind CSS", icon: "tailwindcss" },
-      { name : "Bootstrap", icon: "bootstrap" },
-      { name : "Angular", icon: "angular" },
+      { name: "Bootstrap", icon: "bootstrap" },
+      { name: "Angular", icon: "angular" },
     ]
   },
   {
@@ -129,51 +132,137 @@ export const skills = [
 /**
  * Section Parcours
  */
-export const parcours = [
+export const formationsData = [
   {
-    number: 1,
+    id: 1,
     title: "Baccalauréat Général",
-    color: "cyan",
+    category: "formation",
+    description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques).",
+    github: "",
+    link: "",
+    techs: ["Maths", "NSI", "Python"],
+    image: "https://www.ac-nantes.fr/sites/ac_nantes/files/2022-03/baccalaur-at-17084.jpeg",
     date: "2021 - 2024",
     school: "Lycée Frédéric Fays",
-    description: "Spécialités Mathématiques et NSI (Numérique et Sciences Informatiques).",
-    progress: 100
+    new: false
   },
   {
-    number: 2,
+    id: 2,
     title: "BTS SIO Option SLAM",
-    color: "blue",
+    category: "formation",
+    description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
+    github: "",
+    link: "",
+    techs: ["PHP", "JavaScript", "SQL", "C#"],
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
     date: "2024 - 2026",
     school: "Lycée Les Chassagnes",
-    description: "Développement d'applications web, gestion de bases de données, cybersécurité et réseaux.",
-    progress: 80
+    new: true
   },
   {
-    number: 3,
-    title: "Stage Développeur Web",
-    color: "orange",
-    date: "2025",
-    school: "Les Chassagnes",
-    description: "Développement d'une application de gestion de stages en Laravel.",
-    progress: 100
-  },
-  {
-    number: 4,
-    title: "Stage Développeur Web",
-    color: "purple",
-    date: "Janvier - Février 2026",
-    school: "APICIL",
-    description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
-    progress: 100
-  },
-  {
-    number: 5,
-    title: "Bachelor Developpeur Fullstack",
-    color: "green",
+    id: 3,
+    title: "Bachelor Développeur Fullstack",
+    category: "recherche",
+    description: "Poursuite d'études en alternance pour approfondir les compétences DevOps, CI/CD, cloud et architecture fullstack.",
+    github: "",
+    link: "",
+    techs: ["Fullstack", "DevOps", "CI/CD"],
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80",
     date: "Rentrée 2026",
     school: "En recherche d'alternance",
-    description: "Poursuite d'études en alternance pour approfondir les compétences DevOps, CI/CD, cloud et architecture fullstack.",
-    progress: 0
+    new: true
+  }
+];
+
+export const stagesData = [
+  {
+    id: 1,
+    title: "Stage Développeur Web",
+    category: "stage",
+    description: "Développement d'une application de gestion de stages en Laravel.",
+    github: "",
+    link: "",
+    techs: ["Laravel", "PHP", "MySQL", "Tailwind"],
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    date: "2025",
+    school: "Les Chassagnes",
+    new: false
+  },
+  {
+    id: 2,
+    title: "Stage Développeur Web",
+    category: "stage",
+    description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
+    github: "",
+    link: "",
+    techs: ["React", "API", "Scrum"],
+    image: "https://th.bing.com/th/id/OIP.ZCcG5cusX5-ilvKG9o0olAHaEK?w=315&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    date: "Janvier - Février 2026",
+    school: "APICIL",
+    new: true
+  }
+];
+
+export const realisationsData = [
+  // Placeholder array for AP/TP. User said they would add them themselves, but let's provide a structure.
+  {
+    id: 1,
+    title : "AP - M@Banque",
+    category: "ap",
+    description: "Atelier de professionnalisation : développement d'une application de gestion bancaire en PHP.",
+    github: "",
+    link: "",
+    techs: ["PHP", "MySQL"],
+    image: "https://th.bing.com/th/id/OIP.mAhhcad_-s47pvcBj5Oe8QHaEK?w=317&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    new: false
+  },
+  {
+    id: 2,
+    title: "AP - Gestion des adhérents",
+    category: "ap",
+    description: "Atelier de professionnalisation : création d'un système complet de gestion.",
+    github: "",
+    link: "",
+    techs: ["PHP", "VBA", "SQL"],
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
+    new: false
+  },
+  {
+    id: 3,
+    title: "AP - Client lourd pour la gestion des stocks",
+    category: "ap",
+    description: "Travail pratique : développement d'une application de gestion de stock en C#.",
+    github: "",
+    link: "",
+    techs: ["C#", "MySQL", ".Net Core"],
+    image: "https://th.bing.com/th/id/OIP.1jXQf4IHH44r1A3HAHbueQHaEK?w=321&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    new: false
+  },
+  {
+    id: 4,
+    title: "AP - Application mobile LyonPalme",
+    category: "ap",
+    description: "Atelier de professionnalisation : développement d'une application mobile en React Native pour la gestion d'événements sportifs à Lyon.",
+    github: "",
+    link: "",
+    techs: ["React Native", "JavaScript", "API"],
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+    new: false
+  }
+
+];
+
+/**
+ * Veille technologique
+ */
+export const veilleData = [
+  {
+    id: 1,
+    title: "L'évolution des frameworks web modernes",
+    date: "2025 - 2026",
+    description: "Comparaison des frameworks ( React, Angular, Laravel, Symfony) : nouveautés (Laravel 12, React 19), performances et essor du Full-stack JS (Next.js, Nuxt.js).",
+    link: "#",
+    source: "Sujet principal"
   }
 ];
 
@@ -331,17 +420,32 @@ export const contact = {
  */
 export const sectionsHeaders = {
   competences: {
-    title: "Compétences",
+    title: "Tableau des Compétences",
     subtitle: "Mon arsenal technologique",
     gradient: "from-purple-400 to-pink-500"
   },
-  parcours: {
-    title: "Mon Parcours",
-    subtitle: "Formation & Expériences",
+  veille: {
+    title: "Veille Technologique",
+    subtitle: "Recherche et actualité IT",
+    gradient: "from-green-400 to-emerald-500"
+  },
+  formation: {
+    title: "Formation",
+    subtitle: "Mon parcours académique",
     gradient: "from-blue-400 to-cyan-500"
   },
+  realisations: {
+    title: "Réalisations en formation",
+    subtitle: "Travaux Pratiques et Atelier de Professionnalisation",
+    gradient: "from-orange-400 to-red-500"
+  },
+  stages: {
+    title: "Stages",
+    subtitle: "Expériences professionnelles",
+    gradient: "from-yellow-400 to-orange-500"
+  },
   projets: {
-    title: "Mes Projets",
+    title: "Mes Projets Personnels",
     subtitle: "Réalisations & Créations",
     gradient: "from-purple-400 to-pink-500"
   },

@@ -4,7 +4,10 @@ import {
   navigation,
   hero,
   skills,
-  parcours,
+  formationsData,
+  stagesData,
+  realisationsData,
+  veilleData,
   projectsConfig,
   projects,
   contact,
@@ -12,10 +15,7 @@ import {
   loaderConfig,
   socialIcons,
   skillsCardStyles,
-  skillsTitleColors,
-  parcoursCardStyles,
-  parcoursTitleColors,
-  parcoursBadgeStyles
+  skillsTitleColors
 } from './content';
 
 const PROJECT_BASE_URL = 'https://ryanfonseca.fr';
@@ -253,7 +253,102 @@ const Accueil = () => (
 );
 
 /**
- * COMPETENCES
+ * COMPOSANT GÉNÉRIQUE CARTE SECTION
+ */
+const CardSection = ({ id, headerInfo, data }) => (
+  <section id={id} className="py-20 bg-transparent opacity-0 animate-slide-in-left animation-delay-400">
+    <div className="container mx-auto px-6 text-center mb-16">
+      <h2 className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${headerInfo.gradient} mb-4 font-mono tracking-tight`}>
+        {headerInfo.title}
+      </h2>
+      <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{headerInfo.subtitle}</p>
+    </div>
+    
+    <div className="container mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {data.map((item) => {
+          const itemLink = item.link && item.link !== '' ? `${PROJECT_BASE_URL}${item.link}` : null;
+          return (
+            <div key={item.id} className="relative group">
+              <div className={`bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-2 border-purple-400 rounded-2xl overflow-hidden shadow-lg shadow-purple-500/50 transition-all duration-300 hover:scale-105 h-full flex flex-col ${itemLink ? 'cursor-pointer' : ''}`}
+                   onClick={() => itemLink && window.open(itemLink, '_blank')}>
+                {item.new === true && (
+                  <div className="absolute -top-3 -right-3 bg-yellow-500 text-gray-900 font-mono font-bold text-xs px-3 py-1 rounded-full border-2 border-yellow-300 shadow-lg z-10">
+                    ⭐ NEW
+                  </div>
+                )}
+                {item.date && (
+                  <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-gray-300 font-mono text-xs px-3 py-1 rounded-full border border-gray-600 shadow z-10">
+                    📅 {item.date}
+                  </div>
+                )}
+                <div className="h-48 overflow-hidden bg-gray-800">
+                  {item.image ? (
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-4xl">👨‍💻</div>
+                  )}
+                </div>
+
+                <div className="p-6 flex-1 flex flex-col">
+                  {item.school && <p className="text-blue-400 text-sm font-mono mb-1">{item.school}</p>}
+                  <h3 className="text-xl font-bold text-purple-300 mb-2 font-mono uppercase tracking-wide">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4 font-mono flex-1">
+                    {item.description}
+                  </p>
+                  
+                  {item.techs && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {item.techs.map((tech) => (
+                        <span key={tech} className="text-xs px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400 font-mono font-semibold">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <div className="flex gap-2 mt-auto">
+                    {item.github && item.github !== '' && (
+                      <a 
+                        href={item.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-1 text-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm border border-gray-600" 
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        GitHub
+                      </a>
+                    )}
+                    {item.link && item.link !== '' && (
+                      <a 
+                        href={itemLink}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm" 
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Voir
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
+
+/**
+ * COMPETENCES ET TABLEAU DES COMPETENCES
  */
 const Competences = () => {
   return (
@@ -296,80 +391,51 @@ const Competences = () => {
           })}
         </div>
       </div>
-    </section>
-  );
-};
-
-/**
- * PARCOURS
- */
-const Parcours = () => {
-  return (
-    <section id="experience" className="py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-300">
-      <div className="container mx-auto px-6 text-center mb-16">
-        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4 font-mono tracking-tight">
-          {sectionsHeaders.parcours.title}
-        </h2>
-        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.parcours.subtitle}</p>
-      </div>
       
-      <div className="container mx-auto px-6">
-        {/* Grille des étapes du parcours */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {parcours.map((step, index) => {
-            const colorKey = step.color || 'blue';
-            return (
-              <div key={step.number} className="relative group">
-                <div className={`${parcoursCardStyles[colorKey]} border-2 rounded-2xl p-6 h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg`}>
-                  {/* Badge de niveau */}
-                  <div className={`absolute -top-7 left-6 ${parcoursBadgeStyles[colorKey]} border-2 rounded-full px-3 py-0 font-mono font-bold text-sm`}>
-                    LVL {step.number}
-                  </div>
-                  
-                  <h3 className={`text-xl font-bold ${parcoursTitleColors[colorKey]} mb-3 font-mono uppercase tracking-wide mt-4`}>
-                    {step.title}
-                  </h3>
-                  
-                  {/* Informations date et école */}
-                  <div className="mb-4 space-y-1">
-                    <div className="text-gray-400 text-sm font-mono">{step.date}</div>
-                    <div className="text-gray-400 text-sm font-mono">{step.school}</div>
-                  </div>
-                  
-                  {/* Description */}
-                  <p className="text-gray-300 text-sm leading-relaxed font-mono">
-                    {step.description}
-                  </p>
-                  
-                  {/* Barre de progression */}
-                  <div className="mt-4 bg-gray-800 rounded-full h-2 overflow-hidden">
-                    <div
-                      className={`h-full bg-gradient-to-r ${colorKey === 'cyan' ? 'from-cyan-500 to-cyan-400' :
-                        colorKey === 'blue' ? 'from-blue-500 to-blue-400' :
-                        colorKey === 'orange' ? 'from-orange-500 to-orange-400' :
-                        colorKey === 'purple' ? 'from-purple-500 to-purple-400' :
-                        'from-green-500 to-green-400'} transition-all duration-500`}
-                      style={{width: `${step.progress}%`}}
-                    >
-                    </div>
-                  </div>
-                  
-                  {/* Indicateur de progression */}
-                  <div className="flex justify-between items-center mt-2">
-                    <span className="text-xs text-gray-400 font-mono">Progression</span>
-                    <span className="text-xs font-bold font-mono text-white">
-                      {step.progress}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      {/* Tableau des Compétences */}
+      <div className="container mx-auto px-4 md:px-6 mt-20 text-center max-w-5xl">
+        <h3 className="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-8 font-mono tracking-tight">
+          Document de Synthèse
+        </h3>
+        <div className="bg-gray-900/50 border-2 border-blue-500/30 rounded-xl p-8 backdrop-blur-sm hover:border-blue-400 transition-colors duration-300">
+          <p className="text-gray-300 font-mono mb-6 text-lg">
+            Retrouvez ici mon tableau des compétences complet (format officiel BTS SIO), faisant le lien entre mes différentes réalisations professionnelles (TP, AP, Stages) et les compétences du référentiel SLAM.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="#" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-mono font-bold hover:scale-105 transition-transform shadow-lg shadow-blue-500/30 flex items-center gap-2">
+              Consulter le Tableau des Compétences
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+/**
+ * VEILLE TECHNOLOGIQUE
+ */
+const Veille = () => (
+  <section id="veille" className="py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-300">
+    <div className="container mx-auto px-6 text-center mb-16">
+      <h2 className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${sectionsHeaders.veille.gradient} mb-4 font-mono tracking-tight`}>
+        {sectionsHeaders.veille.title}
+      </h2>
+      <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.veille.subtitle}</p>
+    </div>
+    <div className="container mx-auto px-6 max-w-4xl space-y-6">
+      {veilleData.map((item) => (
+        <div key={item.id} className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/50 rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="text-emerald-400 font-mono text-sm mb-2">{item.date} • {item.source}</div>
+            <h3 className="text-white font-mono text-xl font-bold mb-2">{item.title}</h3>
+            <p className="text-gray-300 font-mono text-sm md:text-base">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
 
 /**
  * PROJETS
@@ -713,7 +779,10 @@ const Portfolio = () => {
       <Header />
       <Accueil />
       <Competences />
-      <Parcours />
+      <Veille />
+      <CardSection id="formation" headerInfo={sectionsHeaders.formation} data={formationsData} />
+      <CardSection id="realisations" headerInfo={sectionsHeaders.realisations} data={realisationsData} />
+      <CardSection id="stages" headerInfo={sectionsHeaders.stages} data={stagesData} />
       <Projets activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       <Contact />
       <Footer />
