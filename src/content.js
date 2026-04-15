@@ -23,11 +23,12 @@ export const personalInfo = {
  */
 export const navigation = [
   { href: '#accueil', label: 'Accueil' },
+  { href: '#skills', label: 'Stacks' },
   { href: '#competences', label: 'Compétences' },
   { href: '#veille', label: 'Veille' },
   { href: '#formation', label: 'Formation' },
   { href: '#realisations', label: 'Réalisations' },
-  { href: '#stages', label: 'Stages' },
+  { href: '#experience', label: 'Expérience pro' },
   { href: '#projets', label: 'Projets personnels' },
   { href: '#contact', label: 'Contact' }
 ];
@@ -49,7 +50,7 @@ export const hero = {
   cta: {
     primary: {
       text: "Télécharger CV",
-      href: "/ryan_fonseca_cv.pdf",
+      href: "/cv_ryan_fonseca.pdf",
       download: true
     },
     secondary: {
@@ -174,14 +175,15 @@ export const formationsData = [
   }
 ];
 
-export const stagesData = [
+export const experienceData = [
   {
     id: 1,
-    title: "Stage Développeur Web",
-    category: "stage",
+    title: "Développeur Web",
+    type: "Stage",
     description: "Développement d'une application de gestion de stages en Laravel.",
     github: "",
     link: "",
+    reportUrl: "/Rapport_Stage_Ryan_Fonseca.pdf",
     techs: ["Laravel", "PHP", "MySQL", "Tailwind"],
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
     date: "2025",
@@ -190,12 +192,13 @@ export const stagesData = [
   },
   {
     id: 2,
-    title: "Stage Développeur Web",
-    category: "stage",
+    title: "Développeur Web",
+    type: "Stage",
     description: "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
     github: "",
     link: "",
-    techs: ["React", "API", "Scrum"],
+    reportUrl: "/rapport_stage_apicil.pdf",
+    techs: ["React", "PHP", "API", "Scrum", "WordPress", "Jira", "Git", "Figma", "Postman", "Docker"],
     image: "https://th.bing.com/th/id/OIP.ZCcG5cusX5-ilvKG9o0olAHaEK?w=315&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
     date: "Janvier - Février 2026",
     school: "APICIL",
@@ -236,7 +239,7 @@ export const realisationsData = [
     link: "",
     techs: ["C#", "MySQL", ".Net Core"],
     image: "https://th.bing.com/th/id/OIP.1jXQf4IHH44r1A3HAHbueQHaEK?w=321&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
-    new: false
+    new: true
   },
   {
     id: 4,
@@ -247,7 +250,7 @@ export const realisationsData = [
     link: "",
     techs: ["React Native", "JavaScript", "API"],
     image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
-    new: false
+    new: true
   }
 
 ];
@@ -261,8 +264,9 @@ export const veilleData = [
     title: "L'évolution des frameworks web modernes",
     date: "2025 - 2026",
     description: "Comparaison des frameworks ( React, Angular, Laravel, Symfony) : nouveautés (Laravel 12, React 19), performances et essor du Full-stack JS (Next.js, Nuxt.js).",
-    link: "#",
-    source: "Sujet principal"
+    source: "Sujet principal",
+    pdfUrl: "/Levolution-des-frameworks-web-modernes.pdf",
+    pptxUrl: "/Levolution-des-frameworks-web-modernes.pptx"
   }
 ];
 
@@ -419,9 +423,14 @@ export const contact = {
  * Sections headers
  */
 export const sectionsHeaders = {
-  competences: {
-    title: "Tableau des Compétences",
+  skills: {
+    title: "Stacks & Outils maitrisés",
     subtitle: "Mon arsenal technologique",
+    gradient: "from-purple-400 to-pink-500"
+  },
+  competences: {
+    title: "Tableau de compétences",
+    subtitle: "",
     gradient: "from-purple-400 to-pink-500"
   },
   veille: {
@@ -439,9 +448,9 @@ export const sectionsHeaders = {
     subtitle: "Travaux Pratiques et Atelier de Professionnalisation",
     gradient: "from-orange-400 to-red-500"
   },
-  stages: {
-    title: "Stages",
-    subtitle: "Expériences professionnelles",
+  experience: {
+    title: "Expérience professionnelle",
+    subtitle: "Stages, alternances & missions",
     gradient: "from-yellow-400 to-orange-500"
   },
   projets: {

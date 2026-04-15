@@ -5,7 +5,7 @@ import {
   hero,
   skills,
   formationsData,
-  stagesData,
+  experienceData,
   realisationsData,
   veilleData,
   projectsConfig,
@@ -279,7 +279,7 @@ const CardSection = ({ id, headerInfo, data }) => (
                 )}
                 {item.date && (
                   <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-gray-300 font-mono text-xs px-3 py-1 rounded-full border border-gray-600 shadow z-10">
-                    📅 {item.date}
+                    {item.date}
                   </div>
                 )}
                 <div className="h-48 overflow-hidden bg-gray-800">
@@ -295,6 +295,11 @@ const CardSection = ({ id, headerInfo, data }) => (
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
+                  {item.type && (
+                    <span className="self-start mb-2 text-xs px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-400 font-mono font-bold uppercase tracking-wider">
+                      {item.type}
+                    </span>
+                  )}
                   {item.school && <p className="text-blue-400 text-sm font-mono mb-1">{item.school}</p>}
                   <h3 className="text-xl font-bold text-purple-300 mb-2 font-mono uppercase tracking-wide">
                     {item.title}
@@ -313,27 +318,38 @@ const CardSection = ({ id, headerInfo, data }) => (
                     </div>
                   )}
                   
-                  <div className="flex gap-2 mt-auto">
+                  <div className="flex flex-wrap gap-2 mt-auto">
                     {item.github && item.github !== '' && (
-                      <a 
-                        href={item.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="flex-1 text-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm border border-gray-600" 
+                      <a
+                        href={item.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 text-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm border border-gray-600"
                         onClick={(e) => e.stopPropagation()}
                       >
                         GitHub
                       </a>
                     )}
                     {item.link && item.link !== '' && (
-                      <a 
+                      <a
                         href={itemLink}
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Voir
+                      </a>
+                    )}
+                    {item.reportUrl && item.reportUrl !== '' && (
+                      <a
+                        href={item.reportUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-2 rounded-lg transition-all font-mono font-bold text-sm"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Rapport de stage
                       </a>
                     )}
                   </div>
@@ -348,21 +364,21 @@ const CardSection = ({ id, headerInfo, data }) => (
 );
 
 /**
- * COMPETENCES ET TABLEAU DES COMPETENCES
+ * SKILLS
  */
-const Competences = () => {
+const Skills = () => {
   return (
-    <section id="competences" className="py-16 md:py-20 bg-transparent opacity-0 animate-slide-in-left animation-delay-200">
+    <section id="skills" className="py-16 md:py-20 bg-transparent opacity-0 animate-slide-in-left animation-delay-200">
       <div className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-16">
         <h2 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 font-mono tracking-tight">
-          {sectionsHeaders.competences.title}
+          {sectionsHeaders.skills.title}
         </h2>
-        <p className="text-lg md:text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.competences.subtitle}</p>
+        <p className="text-lg md:text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.skills.subtitle}</p>
       </div>
       
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-6xl mx-auto">
-          {skills.map((skill, index) => {
+          {skills.map((skill) => {
             const colorKey = skill.title === "FRONTEND" ? "purple" : skill.title === "BACKEND" ? "blue" : skill.title === "BASE DE DONNÉES" ? "green" : "yellow";
             return (
               <div 
@@ -392,49 +408,143 @@ const Competences = () => {
         </div>
       </div>
       
-      {/* Tableau des Compétences */}
-      <div className="container mx-auto px-4 md:px-6 mt-20 text-center max-w-5xl">
-        <h3 className="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-8 font-mono tracking-tight">
-          Document de Synthèse
-        </h3>
-        <div className="bg-gray-900/50 border-2 border-blue-500/30 rounded-xl p-8 backdrop-blur-sm hover:border-blue-400 transition-colors duration-300">
-          <p className="text-gray-300 font-mono mb-6 text-lg">
-            Retrouvez ici mon tableau des compétences complet (format officiel BTS SIO), faisant le lien entre mes différentes réalisations professionnelles (TP, AP, Stages) et les compétences du référentiel SLAM.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <a href="#" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-mono font-bold hover:scale-105 transition-transform shadow-lg shadow-blue-500/30 flex items-center gap-2">
-              Consulter le Tableau des Compétences
-            </a>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
 
 /**
- * VEILLE TECHNOLOGIQUE
+ * COMPETENCES
  */
-const Veille = () => (
-  <section id="veille" className="py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-300">
-    <div className="container mx-auto px-6 text-center mb-16">
-      <h2 className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${sectionsHeaders.veille.gradient} mb-4 font-mono tracking-tight`}>
-        {sectionsHeaders.veille.title}
+const Competences = () => (
+  <section id="competences" className="py-16 md:py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-200">
+    <div className="container mx-auto px-4 md:px-6 text-center mb-12 md:mb-16">
+      <h2 className={`text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${sectionsHeaders.competences.gradient} mb-4 font-mono tracking-tight`}>
+        {sectionsHeaders.competences.title}
       </h2>
-      <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.veille.subtitle}</p>
+      {sectionsHeaders.competences.subtitle && (
+        <p className="text-lg md:text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.competences.subtitle}</p>
+      )}
     </div>
-    <div className="container mx-auto px-6 max-w-4xl space-y-6">
-      {veilleData.map((item) => (
-        <div key={item.id} className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/50 rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="text-emerald-400 font-mono text-sm mb-2">{item.date} • {item.source}</div>
-            <h3 className="text-white font-mono text-xl font-bold mb-2">{item.title}</h3>
-            <p className="text-gray-300 font-mono text-sm md:text-base">{item.description}</p>
-          </div>
+
+    <div className="container mx-auto px-4 md:px-6 text-center max-w-5xl">
+      <div className="bg-gray-900/50 border-2 border-blue-500/30 rounded-xl p-8 backdrop-blur-sm hover:border-blue-400 transition-colors duration-300">
+        <p className="text-gray-300 font-mono mb-6 text-lg">
+          Retrouvez ici mon tableau des compétences complet (format officiel BTS SIO), faisant le lien entre mes différentes réalisations professionnelles (TP, AP, Stages) et les compétences du référentiel SLAM.
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <a href="/Tableau-de-synthèse-Epreuve-E5-BTS-SIO-fonseca-ryan.pdf" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-mono font-bold hover:scale-105 transition-transform shadow-lg shadow-blue-500/30 flex items-center gap-2">
+            Consulter le Tableau des Compétences
+          </a>
         </div>
-      ))}
+      </div>
     </div>
   </section>
+);
+
+/**
+ * VEILLE TECHNOLOGIQUE
+ */
+const Veille = () => {
+  const [activeVeilleId, setActiveVeilleId] = useState(null);
+  const activeVeille = useMemo(
+    () => veilleData.find((v) => v.id === activeVeilleId) ?? null,
+    [activeVeilleId]
+  );
+
+  const toggleVeille = (id) => {
+    setActiveVeilleId((current) => (current === id ? null : id));
+  };
+
+  return (
+    <section id="veille" className="py-20 bg-transparent opacity-0 animate-slide-in-right animation-delay-300">
+      <div className="container mx-auto px-6 text-center mb-16">
+        <h2 className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${sectionsHeaders.veille.gradient} mb-4 font-mono tracking-tight`}>
+          {sectionsHeaders.veille.title}
+        </h2>
+        <p className="text-xl text-gray-400 font-mono uppercase tracking-widest">{sectionsHeaders.veille.subtitle}</p>
+      </div>
+      <div className="container mx-auto px-6 max-w-4xl space-y-6">
+        {veilleData.map((item) => {
+          const isActive = item.id === activeVeilleId;
+          const isClickable = Boolean(item.pdfUrl);
+          return (
+            <div
+              key={item.id}
+              onClick={() => isClickable && toggleVeille(item.id)}
+              role={isClickable ? 'button' : undefined}
+              tabIndex={isClickable ? 0 : undefined}
+              onKeyDown={(e) => {
+                if (!isClickable) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleVeille(item.id);
+                }
+              }}
+              className={`bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 rounded-2xl p-6 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 ${
+                isClickable ? 'cursor-pointer hover:scale-[1.02]' : ''
+              } ${isActive ? 'border-green-400 shadow-lg shadow-green-500/30' : 'border-green-500/50'}`}
+            >
+              <div className="flex-1">
+                <div className="text-emerald-400 font-mono text-sm mb-2">{item.date} • {item.source}</div>
+                <h3 className="text-white font-mono text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-gray-300 font-mono text-sm md:text-base">{item.description}</p>
+              </div>
+              {isClickable && (
+                <svg
+                  className={`w-6 h-6 text-green-400 shrink-0 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {activeVeille && <VeilleViewer veille={activeVeille} />}
+    </section>
+  );
+};
+
+const VeilleViewer = ({ veille }) => (
+  <div className="container mx-auto px-6 max-w-5xl mt-12 animate-slide-in-right">
+    <div className="bg-gray-900/50 border-2 border-green-500/30 rounded-xl p-6 md:p-8 backdrop-blur-sm">
+      <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 font-mono mb-2 text-center">
+        {veille.title}
+      </h3>
+      <p className="text-gray-300 font-mono text-center mb-6">{veille.date} • {veille.source}</p>
+      <div className="relative w-full rounded-lg overflow-hidden border border-green-500/30 shadow-lg shadow-green-500/20" style={{ paddingTop: '75%' }}>
+        <iframe
+          src={`${veille.pdfUrl}#view=FitH`}
+          title={`Présentation de veille - ${veille.title}`}
+          className="absolute top-0 left-0 w-full h-full"
+        />
+      </div>
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
+        <a
+          href={veille.pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-mono font-bold hover:scale-105 transition-transform shadow-lg shadow-green-500/30"
+        >
+          Ouvrir en plein écran
+        </a>
+        {veille.pptxUrl && (
+          <a
+            href={veille.pptxUrl}
+            download
+            className="bg-gray-800 border-2 border-green-500/50 text-green-400 px-6 py-3 rounded-lg font-mono font-bold hover:bg-gray-700 hover:scale-105 transition-all"
+          >
+            Télécharger le .pptx
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
 );
 
 /**
@@ -475,7 +585,7 @@ const Projets = ({ activeFilter, setActiveFilter }) => {
       {/* Grille des projets filtrés */}
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {filteredProjects.map((project, index) => {
+          {filteredProjects.map((project) => {
             const isComingSoon = project.link === '/coming-soon';
             const projectLink = project.link ? (isComingSoon ? project.link : `${PROJECT_BASE_URL}${project.link}`) : null;
 
@@ -651,7 +761,7 @@ const Contact = () => (
               </div>
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  {contact.techStack.map((tech, index) => (
+                  {contact.techStack.map((tech) => (
                     <span 
                       key={tech}
                       className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 px-3 py-2 rounded-lg text-sm font-mono font-bold hover:scale-110 transition-transform duration-200"
@@ -778,11 +888,12 @@ const Portfolio = () => {
     <div className="min-h-screen bg-slate-900 text-white">
       <Header />
       <Accueil />
+      <Skills />
       <Competences />
       <Veille />
       <CardSection id="formation" headerInfo={sectionsHeaders.formation} data={formationsData} />
       <CardSection id="realisations" headerInfo={sectionsHeaders.realisations} data={realisationsData} />
-      <CardSection id="stages" headerInfo={sectionsHeaders.stages} data={stagesData} />
+      <CardSection id="experience" headerInfo={sectionsHeaders.experience} data={experienceData} />
       <Projets activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       <Contact />
       <Footer />
