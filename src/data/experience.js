@@ -1,0 +1,43 @@
+export const experienceData = [
+  {
+    id: 1,
+    title: 'Développeur Web',
+    type: 'Stage',
+    description: "Développement d'une application de gestion de stages en Laravel.",
+    github: '',
+    link: '',
+    reportUrl: '/Rapport_Stage_Ryan_Fonseca.pdf',
+    techs: ['Laravel', 'PHP', 'MySQL', 'Tailwind'],
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
+    date: '2025',
+    school: 'Les Chassagnes',
+    new: false,
+  },
+  {
+    id: 2,
+    title: 'Développeur Web',
+    type: 'Stage',
+    description:
+      "Développement web en environnement professionnel : conception d'interfaces, intégration backend et travail en équipe.",
+    github: '',
+    link: '',
+    reportUrl: '/rapport_stage_apicil.pdf',
+    techs: [
+      'React',
+      'PHP',
+      'API',
+      'Scrum',
+      'WordPress',
+      'Jira',
+      'Git',
+      'Figma',
+      'Postman',
+      'Docker',
+    ],
+    image:
+      'https://th.bing.com/th/id/OIP.ZCcG5cusX5-ilvKG9o0olAHaEK?w=315&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3',
+    date: 'Janvier - Février 2026',
+    school: 'APICIL',
+    new: true,
+  },
+];
