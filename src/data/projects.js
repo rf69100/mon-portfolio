@@ -21,7 +21,7 @@ export const projects = [
   },
   {
     id: 2,
-    title: 'monBlog',
+    title: 'B2LP - monBlog',
     category: 'web',
     description:
       "Application de blog construite avec Next.js (React) pour le frontend et une API Laravel pour le backend. Supporte SSR/SSG, authentification, éditeur Markdown, gestion des articles et commentaires. Déployée sur Vercel.",
