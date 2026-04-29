@@ -2,7 +2,7 @@ export const contact = {
   title: 'Me Contacter',
   subtitle: 'Prêt pour une collaboration ?',
   mission: {
-    title: 'Alternance Développeur Fullstack',
+    title: 'Alternance Développeur Fullstack / licence pro DevOps',
     dates: 'Rentrée 2026 (rythme entreprise/école)',
   },
   availability: {

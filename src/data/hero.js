@@ -7,9 +7,9 @@ export const hero = {
     "Développeur web passionné par la création d'applications modernes et performantes. Expérience concrète en React, Laravel et gestion de projets fullstack.",
   techs: 'React • Laravel',
   formation: 'BTS SIO SLAM • 2024-2026',
-  context: "En recherche dd'une alternance pour 2026",
+  context: "En recherche d'une alternance pour 2026",
   searchStatus: 'RECHERCHE ACTIVE : Alternance Rentrée 2026',
-  searchDetails: 'Bachelor Developpeur Fullstack',
+  searchDetails: 'Bachelor Developpeur Fullstack / licence pro DevOps',
   cta: {
     primary: {
       text: 'Télécharger CV',

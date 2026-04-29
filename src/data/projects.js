@@ -21,14 +21,14 @@ export const projects = [
   },
   {
     id: 2,
-    title: 'Spotify Album finder',
+    title: 'monBlog',
     category: 'web',
     description:
-      "Application web pour explorer la discographie complète des artistes via l'API Spotify avec interface moderne et responsive.",
-    github: 'https://github.com/rf69100/album_finder_spotify',
-    link: '/spotify-finder/',
-    techs: ['React', 'Spotify API', 'Bootstrap', 'CSS3'],
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+      "Application de blog construite avec Next.js (React) pour le frontend et une API Laravel pour le backend. Supporte SSR/SSG, authentification, éditeur Markdown, gestion des articles et commentaires. Déployée sur Vercel.",
+    github: 'https://github.com/rf69100/monBlogNextjs',
+    link: 'https://b2lp-ryan.vercel.app/',
+    techs: ['Next.js', 'React', 'Laravel', 'API', 'Vercel', 'Tailwind CSS'],
+    image: 'https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=800&q=80',
     new: false,
   },
   {

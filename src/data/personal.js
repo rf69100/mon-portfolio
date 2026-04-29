@@ -9,5 +9,5 @@ export const personalInfo = {
   github: 'https://github.com/rf69100',
   initials: 'RF',
   tagline:
-    'Étudiant BTS SIO SLAM • Recherche alternance Bachelor Developpeur Fullstack 2026',
+    'Étudiant BTS SIO SLAM • Recherche alternance Bachelor Developpeur Fullstack / licence pro DevOps 2026',
 };
