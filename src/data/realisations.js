@@ -30,7 +30,7 @@ export const realisationsData = [
     category: 'ap',
     description:
       "Travail pratique : développement d'une application de gestion de stock en C#.",
-    github: '',
+    github: 'https://github.com/rf69100/client_lourd_lyonpalme',
     link: '',
     techs: ['C#', 'MySQL', '.Net Core'],
     image:
@@ -43,7 +43,7 @@ export const realisationsData = [
     category: 'ap',
     description:
       "Atelier de professionnalisation : développement d'une application mobile en React Native pour la gestion d'événements sportifs à Lyon.",
-    github: '',
+    github: 'https://github.com/rf69100/mobileblog',
     link: '',
     techs: ['React Native', 'JavaScript', 'API'],
     image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80',
