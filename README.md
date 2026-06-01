@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# Portfolio — Ryan Fonseca
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Portfolio personnel single-page déployé sur [ryanfonseca.fr](https://ryanfonseca.fr).
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- **React 19** (Create React App)
+- **Tailwind CSS 3**
+- **prop-types** — validation runtime (pas de TypeScript)
+- **Jest + React Testing Library**
+- Déploiement sur **Apache** (SPA fallback via `.htaccess`)
 
-### `npm start`
+## Démarrage rapide
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+npm start        # dev server sur 0.0.0.0:3000
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Commandes
 
-### `npm test`
+| Commande | Description |
+|---|---|
+| `npm start` | Serveur de développement (`0.0.0.0:3000`) |
+| `npm run build` | Build de production dans `build/` |
+| `npm test` | Tests en mode watch |
+| `npm test -- --watchAll=false` | Tests en mode CI (une seule exécution) |
+| `npm test -- App.test.js` | Lancer un fichier de test spécifique |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ESLint est intégré à `react-scripts` (config `react-app`), pas de script lint séparé.
 
-### `npm run build`
+## Architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Routing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Pas de bibliothèque de routage. `src/App.jsx` choisit entre deux pages lazy-loadées selon `window.location.pathname` via le hook `useRoute` :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `/coming-soon` → `pages/ComingSoon`
+- tout autre chemin → `pages/Portfolio`
 
-### `npm run eject`
+`public/.htaccess` redirige toutes les routes inconnues vers `index.html` (fallback SPA Apache).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Contenu data-driven
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Le contenu du portfolio (projets, formations, expériences, compétences, veille, hero, contact) vit dans `src/data/*.js` sous forme d'objets/tableaux exportés. **Pour modifier le contenu, éditer les fichiers de données — pas le JSX.**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`pages/Portfolio.jsx` connecte chaque export de données à sa section correspondante.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Composants réutilisables
 
-## Learn More
+`components/sections/CardSection.jsx` est un composant générique utilisé pour les sections "formation", "réalisations" et "expérience" — chacun reçoit un tableau `data` différent et un objet header depuis `data/sectionsHeaders.js`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`components/common/Card.jsx` est le renderer de carte partagé ; il adapte son rendu selon les champs optionnels présents (`date`, `school`, `type`, `techs`, `github`, `link`, `reportUrl`, `new`).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Résolution des liens
 
-### Code Splitting
+`utils/buildProjectUrl.js` résout le champ `link` d'un item :
+- Les préfixes externes/spéciaux (`http`, `mailto`, `tel`, `#`) et les chemins absolus internes (`/coming-soon`) passent tels quels.
+- Tout autre chemin est préfixé avec `PROJECT_BASE_URL`.
+- Un `link` à `/coming-soon` fait afficher un bouton "Bientôt" au lieu de "Voir".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Configuration & variables d'environnement
 
-### Analyzing the Bundle Size
+`src/config/env.js` centralise les constantes partagées :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Variable | Valeur par défaut | Description |
+|---|---|---|
+| `REACT_APP_PROJECT_BASE_URL` | `https://ryanfonseca.fr` | Base URL des sous-projets |
+| `LOADER_DELAY_MS` | — | Délai du loader initial |
+| `SCROLL_THRESHOLD` | — | Seuil de scroll pour les animations |
 
-### Making a Progressive Web App
+### Tailwind — ne pas interpoler les classes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`src/data/styleMaps.js` mappe des clés sémantiques (`cyan`, `blue`, `orange`, `purple`, `green`, `red`) vers des chaînes de classes Tailwind **complètes et littérales**. Tailwind purge les classes qu'il ne trouve pas en clair dans les sources — ne jamais construire les noms dynamiquement (ex: `` `bg-${color}-500` `` sera purgé).
 
-### Advanced Configuration
+### Animations scroll-reveal
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Les sections démarrent avec `opacity-0` + une classe `animate-*`. Le hook `useScrollReveal` (utilisé par `Portfolio`) ajoute `animate-visible` via `IntersectionObserver` quand une `section[id]` entre dans le viewport, et gère le smooth-scroll vers le hash d'URL au chargement. Les keyframes et classes utilitaires d'animation sont définis dans `src/App.css` et `src/index.css`.
 
-### Deployment
+### Résilience & chargement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Chaque section Portfolio est enveloppée dans `components/common/ErrorBoundary.jsx` — une section en erreur n'affecte pas le reste de la page.
+- Les sections lourdes (`Projects`, `Contact`) et les deux pages utilisent `React.lazy` + `Suspense`.
+- `useInitialLoad` affiche un `Loader` pendant `LOADER_DELAY_MS` avant de révéler la page.
 
-### `npm run build` fails to minify
+### Assets statiques
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Les PDFs (CV, rapports de stage, présentations) et images sont dans `public/` et référencés par chemin absolu depuis les fichiers de données (ex: `cta.href: '/cv_ryan_fonseca.pdf'`).
+
+## Structure du projet
+
+```
+src/
+├── App.jsx              # Entrée — routing + lazy loading
+├── config/env.js        # Constantes et variables d'environnement
+├── data/                # Contenu du portfolio (éditer ici pour modifier le contenu)
+│   ├── styleMaps.js     # Map couleurs → classes Tailwind littérales
+│   ├── sectionsHeaders.js
+│   └── *.js             # Projets, formations, expériences, compétences…
+├── pages/
+│   ├── Portfolio.jsx    # Page principale
+│   └── ComingSoon.jsx   # Page placeholder
+├── components/
+│   ├── common/          # Card, ErrorBoundary, Loader…
+│   └── sections/        # CardSection, Hero, Skills…
+├── hooks/               # useRoute, useScrollReveal, useInitialLoad…
+└── utils/               # buildProjectUrl.js…
+public/
+├── .htaccess            # Fallback SPA Apache
+└── *.pdf / images       # Assets statiques
+```
+
+## Conventions
+
+- Composants en `.jsx`, exports nommés (sauf `Portfolio`, `ComingSoon` et `App` qui sont des exports par défaut).
+- `PropTypes` déclarés sur chaque composant.
+- Hooks réutilisables dans `src/hooks/`, un hook par fichier, nommés `use*`.
+- Tous les textes UI sont en français.
